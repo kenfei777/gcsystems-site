@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GCS Canada | Canadian Scale · Medical Consistency · Australia Ready</title>
-    <!-- 核心加速库 -->
+    
+    <!-- 核心库：Tailwind + FontAwesome + Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -54,6 +55,14 @@
             if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
+        function handleImgError(img) {
+            if (!img.dataset.retried) {
+                img.dataset.retried = "true";
+                const currentSrc = img.src;
+                img.src = currentSrc + "?v=" + new Date().getTime();
+            }
+        }
+
         async function handleNativeSubmit(event) {
             event.preventDefault();
             const form = event.target;
@@ -72,11 +81,9 @@
                     document.getElementById('nativeContactForm').style.display = 'none';
                     document.getElementById('successMessage').style.display = 'block';
                     form.reset();
-                } else {
-                    alert("Submission failed. Please check your Formspree ID.");
                 }
             } catch (error) {
-                alert("Network error. Please try again.");
+                // 静默处理或简单提示
             } finally {
                 btn.disabled = false;
                 btnText.innerText = "Submit Partner Enquiry";
@@ -88,15 +95,37 @@
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif !important; font-weight: 700; }
         p, span, div, li, button, label { font-family: 'Montserrat', sans-serif !important; }
         .content-section { min-height: 80vh; display: none; }
+        
         .hero-section {
             background: linear-gradient(rgba(8, 77, 62, 0.75), rgba(8, 77, 62, 0.65)), url('home.jpg');
             background-size: cover; background-position: center; background-color: #084D3E;
         }
+
         .text-shadow-heavy { text-shadow: 0 4px 15px rgba(0,0,0,0.85); }
         .nav-active { position: relative; }
         .nav-active::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 2px; background: #D4AF37; }
-        .img-fill-container { border-radius: 2.5rem; overflow: hidden; height: 450px; background: #f1f5f9; }
-        .img-fill-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 核心修复：彻底消除任何底色或边框条纹 */
+        .img-fill-container { 
+            border-radius: 2.5rem; 
+            overflow: hidden; 
+            height: 450px; 
+            background: transparent !important; /* 强制透明，消除深绿条/黑条背景 */
+            display: block;
+            border: none !important;
+            padding: 0 !important;
+        }
+        .img-fill-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+            border: none !important;
+        }
+
+        /* 针对 Advantage 页面的图片高度调优 */
+        .img-advantage { height: 580px !important; } 
+
         .huge-title { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.1; font-weight: 800; }
         .form-input {
             width: 100%; background: #F8FAFB; border: 1px solid #E2E8F0; border-radius: 12px;
@@ -109,22 +138,21 @@
 
     <!-- 导航栏 -->
     <nav class="fixed w-full z-[100] bg-brandGreen text-white shadow-xl">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center text-white">
-            <div class="cursor-pointer text-left" onclick="showPage('home')">
-                <span class="text-2xl font-bold tracking-tighter text-white">GCS Canada</span>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
+            <div class="cursor-pointer" onclick="showPage('home')">
+                <span class="text-2xl font-bold tracking-tighter">GCS Canada</span>
             </div>
-            <!-- 页眉导航：已优化为 sm 字号 (14px) -->
-            <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest text-white">
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
                 <button onclick="showPage('home')" id="nav-home" class="hover:text-brandGold transition">Home</button>
                 <button onclick="showPage('advantage')" id="nav-advantage" class="hover:text-brandGold transition">Advantage</button>
                 <button onclick="showPage('capabilities')" id="nav-capabilities" class="hover:text-brandGold transition">Capabilities</button>
                 <button onclick="showPage('portfolio')" id="nav-portfolio" class="hover:text-brandGold transition">Portfolio</button>
                 <button onclick="showPage('contact')" id="nav-contact" class="px-6 py-2 bg-brandGold text-brandGreen rounded font-black hover:bg-white transition-all text-brandGreen">Contact</button>
             </div>
-            <button class="lg:hidden text-2xl text-white" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars-staggered"></i></button>
+            <button class="lg:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars-staggered"></i></button>
         </div>
         <!-- 移动端菜单 -->
-        <div id="mobileMenu" style="display: none;" class="lg:hidden bg-brandGreen border-t border-white/10 p-6 space-y-4 font-bold text-center text-white">
+        <div id="mobileMenu" style="display: none;" class="lg:hidden bg-brandGreen border-t border-white/10 p-6 space-y-4 font-bold text-center">
             <button onclick="showPage('home')" class="block w-full py-2">Home</button>
             <button onclick="showPage('advantage')" class="block w-full py-2">Advantage</button>
             <button onclick="showPage('capabilities')" class="block w-full py-2">Capabilities</button>
@@ -135,50 +163,49 @@
 
     <main class="pt-20">
 
-        <!-- 🟩 HOME -->
+        <!-- 🟩 HOME (对照模板还原) -->
         <section id="page-home" class="content-section" style="display: block;">
             <div class="hero-section h-[85vh] flex items-center text-left text-white">
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
                     <div class="max-w-3xl">
-                        <h1 class="text-5xl lg:text-7xl font-serif font-bold mb-6 leading-tight text-shadow-heavy">Canadian Scale.<br>Medical Consistency.<br><span class="text-brandGold italic text-brandGold">Australia Ready.</span></h1>
-                        <p class="text-lg lg:text-xl mb-10 font-medium text-shadow-heavy opacity-90 text-white text-left">Reliable medicinal cannabis supply for Australian Distributors & Wholesalers. Engineered for Australian standards and delivered direct from our 10-Acre Canadian facility.</p>
-                        <div class="flex flex-wrap gap-4 text-left">
+                        <h1 class="text-5xl lg:text-7xl font-serif font-bold mb-6 leading-tight text-shadow-heavy">Canadian Scale.<br>Medical Consistency.<br><span class="text-brandGold italic">Australia Ready.</span></h1>
+                        <p class="text-lg lg:text-xl mb-10 font-medium text-shadow-heavy opacity-90">Reliable medicinal cannabis supply for Australian Distributors & Wholesalers. Engineered for Australian standards and delivered direct from our 10-Acre Canadian facility.</p>
+                        <div class="flex flex-wrap gap-4">
                             <button onclick="showPage('portfolio')" class="px-8 py-4 bg-brandGold text-brandGreen font-bold rounded shadow-lg hover:bg-white transition uppercase text-xs">View Portfolio</button>
                             <button onclick="showPage('contact')" class="px-8 py-4 bg-brandGreen text-white border border-white/20 font-bold rounded shadow-lg hover:bg-slate-800 transition uppercase text-xs">Discuss Partnership</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Core Values -->
+            <!-- Core Values 还原 -->
             <div class="py-24 bg-white border-b border-slate-100 text-left">
                 <div class="max-w-7xl mx-auto px-6 lg:px-12">
-                    <h2 class="text-4xl lg:text-5xl font-serif font-bold text-brandGreen mb-16 text-left text-brandGreen">Core Values</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-slate-800">
-                        <div class="border-l-4 border-brandGold pl-8">
-                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2 text-brandGreen">Strategic Scale:</span>40,000 m2 of hybrid & indoor capacity ensures uninterrupted supply—eliminating out-of-stock risks for your patients.</p>
+                    <h2 class="text-4xl lg:text-5xl font-serif font-bold text-brandGreen mb-16">Core Values</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="border-l-4 border-brandGold pl-8 text-left">
+                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2">Strategic Scale:</span>40,000 m2 of hybrid & indoor capacity ensures uninterrupted supply—eliminating out-of-stock risks for your patients.</p>
                         </div>
-                        <div class="border-l-4 border-brandGold pl-8">
-                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2 text-brandGreen text-brandGreen">Clinical Quality:</span>Built within Canada’s rigorous medical framework. We guarantee dependable batch performance and consistent genetic expression.</p>
+                        <div class="border-l-4 border-brandGold pl-8 text-left">
+                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2">Clinical Quality:</span>Built within Canada’s rigorous medical framework. We guarantee dependable batch performance and consistent genetic expression.</p>
                         </div>
-                        <div class="border-l-4 border-brandGold pl-8">
-                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2 text-brandGreen">Trial-Friendly Flexibility:</span>No rigid minimums for initial market placement. Test our quality before scaling your portfolio.</p>
+                        <div class="border-l-4 border-brandGold pl-8 text-left">
+                            <p class="text-lg leading-relaxed text-slate-800"><span class="font-bold text-brandGreen uppercase text-xs tracking-widest block mb-2">Trial-Friendly Flexibility:</span>No rigid minimums for initial market placement. Test our quality before scaling your portfolio.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🟩 ADVANTAGE -->
+        <!-- 🟩 ADVANTAGE (重点：彻底去背景条，调整高度，还原文字) -->
         <section id="page-advantage" class="content-section">
-            <div class="py-20 lg:py-32 bg-white text-left text-slate-800">
+            <div class="py-20 lg:py-32 bg-white text-left">
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 items-center">
                     <div class="lg:w-1/2 space-y-10 text-left">
                         <div>
-                            <p class="text-brandGold font-bold uppercase tracking-widest mb-2 text-xs text-brandGold">Advantage</p>
+                            <p class="text-brandGold font-bold uppercase tracking-widest mb-2 text-xs">Advantage</p>
                             <h2 class="text-4xl lg:text-6xl font-serif font-bold text-brandGreen">The Competitive Edge</h2>
                         </div>
                         <p class="text-xl text-slate-600 leading-relaxed italic">Reliable supply shouldn't be a gamble.</p>
-                        <!-- 核心文案已恢复 -->
                         <p class="text-lg text-slate-500 font-sans leading-relaxed">
                             We remove the complexity of Canadian importing with a model built for Australian continuity, combining decades of cultivation heritage with industrial precision.
                         </p>
@@ -186,67 +213,67 @@
                             <div class="flex gap-6">
                                 <i class="fa-solid fa-microscope text-brandGold text-3xl"></i>
                                 <div>
-                                    <h4 class="text-xl font-bold text-brandGreen mb-2">Owner-Bred Genetics <span class="font-black text-brandGreen">(Infrastructure, Not Inventory)</span></h4>
-                                    <p class="text-slate-600 text-sm">Backed by decades of breeding expertise, access our stabilized cultivars or request <span class="font-black text-brandGreen">Beyond-Catalogue selections</span> to build your unique brand identity.</p>
+                                    <h4 class="text-xl font-bold text-brandGreen mb-2">Owner-Bred Genetics <span class="font-black">(Infrastructure, Not Inventory)</span></h4>
+                                    <p class="text-slate-600 text-sm">Backed by decades of breeding expertise, access our stabilized cultivars or request <span class="font-black">Beyond-Catalogue selections</span> to build your unique brand identity.</p>
                                 </div>
                             </div>
-                            <div class="flex gap-6 text-brandGreen">
-                                <i class="fa-solid fa-coins text-brandGold text-3xl text-brandGold"></i>
-                                <div class="text-left text-brandGreen">
-                                    <h4 class="text-xl font-bold text-brandGreen mb-2 text-brandGreen">Direct Economics <span class="font-black text-brandGreen">(Producer-Direct Pricing)</span></h4>
-                                    <p class="text-slate-600 text-sm">Benefit from <span class="font-black text-brandGreen">sustainable, cultivation-based costing</span> to maximize your wholesale margins and long-term price stability.</p>
+                            <div class="flex gap-6">
+                                <i class="fa-solid fa-coins text-brandGold text-3xl"></i>
+                                <div>
+                                    <h4 class="text-xl font-bold text-brandGreen mb-2">Direct Economics <span class="font-black">(Producer-Direct Pricing)</span></h4>
+                                    <p class="text-slate-600 text-sm">Benefit from <span class="font-black">sustainable, cultivation-based costing</span> to maximize your wholesale margins and long-term price stability.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full text-left">
-                        <div class="img-fill-container shadow-2xl border-4 border-slate-50">
-                            <img src="Advantage.jpg" alt="Advantage" onerror="this.src='https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&q=80&w=1200'">
+                    <div class="lg:w-1/2 w-full">
+                        <!-- 核心调整：应用 img-advantage 高度，背景彻底透明 -->
+                        <div class="img-fill-container img-advantage shadow-2xl">
+                            <img src="Advantage.jpg" alt="Advantage" onerror="handleImgError(this)">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🟩 CAPABILITIES (文案严格锁定) -->
+        <!-- 🟩 CAPABILITIES (对照模板还原) -->
         <section id="page-capabilities" class="content-section">
-            <div class="py-20 lg:py-32 bg-[#F8FAFB] text-left text-slate-800">
-                <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16 text-slate-800">
-                    <p class="text-brandGold font-bold uppercase tracking-widest mb-2 text-xs text-brandGold text-center text-brandGold">Capabilities</p>
-                    <h2 class="text-4xl lg:text-6xl font-serif font-bold text-brandGreen mb-6 text-center text-brandGreen text-center text-brandGreen">Scale, Precision & Compliance</h2>
-                    <p class="text-2xl italic text-slate-500 mb-6 text-center text-slate-500">Built for volume. Engineered for medical consistency.</p>
-                    <p class="max-w-4xl mx-auto text-lg leading-relaxed text-center text-slate-800">Our 40,000 m² integrated facility bridges the gap between premium genetic craft and reliable commercial scale. We manage every step in-house to meet the strict demands of the Australian market.</p>
+            <div class="py-20 lg:py-32 bg-[#F8FAFB] text-left">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16">
+                    <p class="text-brandGold font-bold uppercase tracking-widest mb-2 text-xs">Capabilities</p>
+                    <h2 class="text-4xl lg:text-7xl font-serif font-bold text-brandGreen mb-6">Scale, Precision & Compliance</h2>
+                    <p class="text-2xl italic text-slate-500 mb-6">Built for volume. Engineered for medical consistency.</p>
+                    <p class="max-w-4xl mx-auto text-lg leading-relaxed text-slate-600">Our 40,000 m² integrated facility bridges the gap between premium genetic craft and reliable commercial scale. We manage every step in-house to meet the strict demands of the Australian market.</p>
                 </div>
-                <div class="max-w-5xl mx-auto mb-16 px-6 text-center">
-                    <div class="img-fill-container lg:h-[500px] shadow-xl text-center">
-                        <img src="Capabilities.jpeg" alt="Scale">
+                <div class="max-w-5xl mx-auto mb-16 px-6">
+                    <div class="img-fill-container lg:h-[500px] shadow-xl">
+                        <img src="Capabilities.jpeg" alt="Scale" onerror="handleImgError(this)">
                     </div>
                 </div>
-                <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div class="bg-white p-12 rounded-[2.5rem] shadow-sm flex flex-col border border-slate-100">
-                        <div class="text-brandGold text-4xl mb-8"><i class="fa-solid fa-industry text-brandGold"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-brandGreen text-left text-brandGreen">Advanced Cultivation Infrastructure</h3>
-                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic text-left text-brandGreen">Total environmental control from seed to harvest.</p>
+                        <div class="text-brandGold text-4xl mb-8"><i class="fa-solid fa-industry"></i></div>
+                        <h3 class="text-2xl font-bold mb-4 text-brandGreen">Advanced Cultivation Infrastructure</h3>
+                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic">Total environmental control from seed to harvest.</p>
                         <ul class="space-y-6 text-sm text-slate-600 mt-auto">
-                            <!-- 已应用换行与新描述 -->
                             <li>• <strong>Full Lifecycle Management:</strong><br>In-house nursery and tissue culture lab ensure zero genetic drift and total stability.</li>
                             <li>• <strong>Climate Mastery:</strong><br>Advanced environments to maximize terpene expression across all seasons.</li>
                         </ul>
                     </div>
-                    <div class="bg-white p-12 rounded-[2.5rem] shadow-sm flex flex-col border border-slate-100 text-left">
-                        <div class="text-brandGold text-4xl mb-8 text-brandGold text-left"><i class="fa-solid fa-flask-vial text-brandGold"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-brandGreen text-left text-brandGreen text-brandGreen">Post-Harvest Excellence</h3>
-                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic text-left text-brandGreen">Protecting the plant’s medicinal integrity.</p>
+                    <div class="bg-white p-12 rounded-[2.5rem] shadow-sm flex flex-col border border-slate-100">
+                        <div class="text-brandGold text-4xl mb-8"><i class="fa-solid fa-flask-vial"></i></div>
+                        <h3 class="text-2xl font-bold mb-4 text-brandGreen">Post-Harvest Excellence</h3>
+                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic">Protecting the plant’s medicinal integrity.</p>
                         <ul class="space-y-6 text-sm text-slate-600 mt-auto">
                             <li>• <strong>Craft Touch:</strong><br>Meticulous slow hang-drying and hand-trimming to protect delicate trichomes.</li>
                             <li>• <strong>Peak Preservation:</strong><br>Optimized moisture control to ensure maximum terpene retention.</li>
                         </ul>
                     </div>
-                    <div class="bg-white p-12 rounded-[2.5rem] shadow-sm flex flex-col border border-slate-100 text-left">
-                        <div class="text-brandGold text-4xl mb-8 text-brandGold text-brandGreen text-left"><i class="fa-solid fa-file-shield text-brandGreen text-left"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-brandGreen text-left text-brandGreen">Australia-Ready Compliance</h3>
-                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic text-left text-brandGreen">Medical-grade reliability</p>
-                        <ul class="space-y-6 text-sm text-slate-600 mt-auto text-left">
+                    <div class="bg-white p-12 rounded-[2.5rem] shadow-sm flex flex-col border border-slate-100">
+                        <div class="text-brandGold text-4xl mb-8"><i class="fa-solid fa-file-shield"></i></div>
+                        <h3 class="text-2xl font-bold mb-4 text-brandGreen">Australia-Ready Compliance</h3>
+                        <p class="text-slate-400 font-bold text-xs mb-6 uppercase tracking-widest italic">Medical-grade reliability</p>
+                        <ul class="space-y-6 text-sm text-slate-600 mt-auto">
                             <li>• <strong>Regulatory Precision:</strong><br>Streamlined processes designed for Australian standards.</li>
                             <li>• <strong>Full Transparency:</strong><br>Comprehensive CoAs provided with every batch.</li>
                         </ul>
@@ -255,44 +282,42 @@
             </div>
         </section>
 
-        <!-- 🟩 PORTFOLIO -->
-        <section id="page-portfolio" class="content-section bg-white text-left text-slate-900">
+        <!-- 🟩 PORTFOLIO (对照模板还原) -->
+        <section id="page-portfolio" class="content-section bg-white">
             <div class="py-20 lg:py-40 max-w-7xl mx-auto px-6 lg:px-12 text-left">
-                <!-- 垂直居中对齐 -->
                 <div class="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-24 items-center">
                     <div class="lg:w-2/3 text-left">
-                        <p class="text-brandGold font-bold uppercase tracking-widest mb-4 text-xs text-left text-brandGold">Portfolio</p>
-                        <h2 class="huge-title text-brandGreen text-left text-brandGreen leading-[1.05]">Strategic Supply & <br>Tailored Genetics</h2>
-                        <p class="text-2xl italic text-brandGold mt-6 font-serif text-left text-brandGold">A stable foundation for your portfolio growth.</p>
+                        <p class="text-brandGold font-bold uppercase tracking-widest mb-4 text-xs">Portfolio</p>
+                        <h2 class="huge-title text-brandGreen leading-[1.05]">Strategic Supply & <br>Tailored Genetics</h2>
+                        <p class="text-2xl italic text-brandGold mt-6 font-serif">A stable foundation for your portfolio growth.</p>
                     </div>
-                    <!-- 加长竖道 -->
-                    <div class="lg:w-1/3 border-l-4 border-brandGold pl-10 py-12 text-left">
-                        <p class="text-slate-700 text-lg leading-relaxed font-medium text-left">
+                    <div class="lg:w-1/3 border-l-4 border-brandGold pl-10 py-12">
+                        <p class="text-slate-700 text-lg leading-relaxed font-medium">
                             We don't just sell flower; we provide strategic product architectures. From curated staples to exclusive partnerships, our vault is built for the Australian market.
                         </p>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left text-slate-800">
-                    <div class="space-y-6">
-                        <div class="img-fill-container h-64 text-center text-slate-900 text-center"><img src="Portfolio01.jpeg" alt="Catalogues"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="space-y-6 text-left">
+                        <div class="img-fill-container h-64 shadow-lg"><img src="Portfolio01.jpeg" alt="Catalogues" onerror="handleImgError(this)"></div>
                         <h3 class="text-xl font-bold text-brandGreen">Core & Extended Catalogues:<br><span class="text-lg">Craft at Scale</span></h3>
                         <ul class="space-y-4 text-slate-600 text-sm leading-relaxed">
                             <li>• <strong>Market Precision:</strong><br>From high-volume staples to rare, high-terpene lineages.</li>
                             <li>• <strong>True Craft Quality:</strong><br>Premium visual appeal with consistent THC/CBD ranges.</li>
                         </ul>
                     </div>
-                    <div class="space-y-6">
-                        <div class="img-fill-container h-64 text-center text-brandGreen text-center"><img src="Portfolio02.jpg" alt="Beyond"></div>
+                    <div class="space-y-6 text-left">
+                        <div class="img-fill-container h-64 shadow-lg"><img src="Portfolio02.jpg" alt="Beyond" onerror="handleImgError(this)"></div>
                         <h3 class="text-xl font-bold text-brandGreen italic">Beyond - Catalogue:<br><span class="text-lg">Your Market Differentiator</span></h3>
-                        <ul class="space-y-4 text-slate-600 text-sm leading-relaxed text-left">
+                        <ul class="space-y-4 text-slate-600 text-sm leading-relaxed">
                             <li>• <strong>Proprietary Genetics:</strong><br>Direct access to our deep, in-house genetic library.</li>
                             <li>• <strong>Tailored Strategy:</strong><br>Build a distinctive brand profile that is difficult for competitors to replicate.</li>
                         </ul>
                     </div>
-                    <div class="space-y-6">
-                        <div class="img-fill-container h-64 text-center text-slate-800 text-center"><img src="Portfolio03.jpg" alt="Trial"></div>
-                        <h3 class="text-xl font-bold text-brandGreen text-left text-brandGreen">The Trial Program:<br><span class="text-lg">Risk-Free Onboarding</span></h3>
-                        <ul class="space-y-4 text-slate-600 text-sm leading-relaxed text-left">
+                    <div class="space-y-6 text-left">
+                        <div class="img-fill-container h-64 shadow-lg"><img src="Portfolio03.jpg" alt="Trial" onerror="handleImgError(this)"></div>
+                        <h3 class="text-xl font-bold text-brandGreen">The Trial Program:<br><span class="text-lg">Risk-Free Onboarding</span></h3>
+                        <ul class="space-y-4 text-slate-600 text-sm leading-relaxed">
                             <li>• <strong>Low-MOQ Trials:</strong><br>Market testing with minimal risk.</li>
                             <li>• <strong>Supply Security:</strong><br>Lock in guaranteed, continuous supply.</li>
                         </ul>
@@ -301,44 +326,43 @@
             </div>
         </section>
 
-        <!-- 🟩 CONTACT (标题恢复金色) -->
-        <section id="page-contact" class="content-section bg-[#F8FAFB] text-left">
+        <!-- 🟩 CONTACT (对照模板还原) -->
+        <section id="page-contact" class="content-section bg-[#F8FAFB]">
             <div class="py-20 lg:py-32 max-w-7xl mx-auto px-6 lg:px-12 text-left">
                 <div class="bg-slate-900 rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl text-white">
                     <div class="lg:w-2/5 bg-brandGreen p-12 lg:p-20 flex flex-col justify-between">
                         <div class="space-y-8">
-                            <!-- 【修正点】：恢复为 text-brandGold，去除了 text-white -->
-                            <h2 class="text-4xl lg:text-6xl font-serif font-bold text-brandGold italic leading-tight text-brandGold">Discuss Your Supply Needs</h2>
+                            <h2 class="text-4xl lg:text-6xl font-serif font-bold text-brandGold italic leading-tight">Discuss Your Supply Needs</h2>
                             <p class="opacity-80 leading-relaxed text-left">Ready to upgrade your supply chain? Partner directly with the producer. We are actively onboarding Australian Partners.</p>
                             <div class="pt-8 border-t border-white/10 text-left">
-                                <p class="text-xs uppercase tracking-widest text-brandGold mb-2 font-bold text-left text-brandGold">Official Email</p>
-                                <p class="text-xl lg:text-2xl font-bold text-left text-white">info@gcsystems.ca</p>
+                                <p class="text-xs uppercase tracking-widest text-brandGold mb-2 font-bold">Official Email</p>
+                                <p class="text-xl lg:text-2xl font-bold">info@gcsystems.ca</p>
                             </div>
                         </div>
                     </div>
                     <div class="lg:w-3/5 p-12 lg:p-20 bg-white text-slate-800 text-left">
                         <div id="nativeContactForm">
                             <h3 class="text-2xl font-serif font-bold text-brandGreen mb-10 italic">Partner Enquiry Form</h3>
-                            <form class="space-y-6 text-slate-800" onsubmit="handleNativeSubmit(event)">
+                            <form class="space-y-6" onsubmit="handleNativeSubmit(event)">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <input type="text" name="company" required placeholder="Company Name" class="form-input text-sm text-slate-800">
-                                    <input type="text" name="name" required placeholder="Contact Name & Role" class="form-input text-sm">
+                                    <input type="text" name="company" placeholder="Company Name" required class="form-input text-sm">
+                                    <input type="text" name="name" placeholder="Contact Name & Role" required class="form-input text-sm">
                                 </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                                    <input type="email" name="email" required placeholder="Email Address" class="form-input text-sm text-left text-slate-800">
-                                    <input type="tel" name="phone" required placeholder="Phone number" class="form-input text-sm">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <input type="email" name="email" placeholder="Email Address" required class="form-input text-sm">
+                                    <input type="tel" name="phone" placeholder="Phone number" class="form-input text-sm">
                                 </div>
-                                <textarea name="message" required rows="4" placeholder="Specific Requirements..." class="form-input text-sm resize-none"></textarea>
-                                <button type="submit" id="submitBtn" class="w-full py-4 bg-brandGreen text-white rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-slate-800 transition-all shadow-xl active:scale-95">
+                                <textarea name="message" rows="4" placeholder="Specific Requirements..." required class="form-input text-sm resize-none"></textarea>
+                                <button type="submit" id="submitBtn" class="w-full py-4 bg-brandGreen text-white rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-slate-800 transition-all shadow-xl">
                                     <span id="btnText">Submit Partner Enquiry</span>
                                 </button>
                             </form>
                         </div>
                         <div id="successMessage" style="display: none;" class="text-center py-10">
-                            <div class="text-brandGold text-6xl mb-6 text-center text-brandGold"><i class="fa-solid fa-circle-check"></i></div>
-                            <h3 class="text-2xl font-bold text-brandGreen mb-2 text-center text-brandGreen">Enquiry Received</h3>
-                            <p class="text-slate-500 mb-8 text-center text-slate-500">Our team will contact you shortly.</p>
-                            <button onclick="showPage('home')" class="text-brandGreen font-bold underline text-center text-brandGreen">Return Home</button>
+                            <div class="text-brandGold text-6xl mb-6"><i class="fa-solid fa-circle-check"></i></div>
+                            <h3 class="text-2xl font-bold text-brandGreen mb-2">Enquiry Received</h3>
+                            <p class="text-slate-500 mb-8">Our team will contact you shortly.</p>
+                            <button onclick="showPage('home')" class="text-brandGreen font-bold underline">Return Home</button>
                         </div>
                     </div>
                 </div>
@@ -347,16 +371,16 @@
 
     </main>
 
-    <!-- 页脚优化 -->
-    <footer class="bg-brandGreen text-white/60 py-12 border-t border-white/5 text-xs uppercase tracking-widest font-bold text-left text-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center text-white">
-            <span class="text-white text-center md:text-left mb-6 md:mb-0">&copy; 2026 GCS Canada | Scale · Precision · Compliance</span>
-            <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-4 text-white">
-                <button onclick="showPage('home')" id="f-nav-home" class="text-white">Home</button>
-                <button onclick="showPage('advantage')" id="f-nav-advantage" class="text-white">Advantage</button>
-                <button onclick="showPage('capabilities')" id="f-nav-capabilities" class="text-white text-white">Capabilities</button>
-                <button onclick="showPage('portfolio')" id="f-nav-portfolio" class="text-white text-white text-white text-white text-white">Portfolio</button>
-                <button onclick="showPage('contact')" id="f-nav-contact" class="text-brandGold">Contact</button>
+    <!-- 页脚还原 -->
+    <footer class="bg-brandGreen text-white/60 py-12 border-t border-white/5 text-xs uppercase tracking-widest font-bold">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center">
+            <span>&copy; 2026 GCS Canada | Scale · Precision · Compliance</span>
+            <div class="flex flex-wrap justify-center md:justify-end gap-6 mt-6 md:mt-0">
+                <button onclick="showPage('home')">Home</button>
+                <button onclick="showPage('advantage')">Advantage</button>
+                <button onclick="showPage('capabilities')">Capabilities</button>
+                <button onclick="showPage('portfolio')">Portfolio</button>
+                <button onclick="showPage('contact')" class="text-brandGold">Contact</button>
             </div>
         </div>
     </footer>
