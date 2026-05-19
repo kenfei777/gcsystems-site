@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — GCS Canada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#132D1E;--forest-mid:#1E4430;--forest-light:#2D6A47;
+  --gold:#C8922A;--gold-lt:#E8B450;
+  --cream:#F7F4EE;--cream-dk:#EDE8DF;
+  --text:#111A0F;--text-mid:#3D5040;--text-lt:#7A8A72;
+  --border:#D8D4CC;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#fff;letter-spacing:.05em;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{background:var(--gold);color:#fff!important;padding:9px 24px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--gold-lt)!important}
+
+.contact-main{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:64px}
+
+/* LEFT PANEL */
+.contact-left{background:var(--forest);padding:80px 60px;display:flex;flex-direction:column;
+  justify-content:center;position:relative;overflow:hidden}
+.contact-left-bg{position:absolute;inset:0;background:url('medical-cannabis.jpg') center 30% / cover no-repeat;opacity:.18;z-index:0;pointer-events:none}
+.contact-left > *:not(.contact-left-bg){position:relative;z-index:1}
+.contact-left::before{content:'';position:absolute;bottom:-60px;right:-60px;width:320px;height:320px;
+  border:1px solid rgba(200,146,42,.1);border-radius:50%;pointer-events:none}
+.left-eyebrow{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.left-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.2vw,3rem);font-weight:600;color:#fff;line-height:1.15;margin-bottom:18px}
+.left-body{font-size:.93rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.58);margin-bottom:32px;max-width:400px}
+.cred-list{display:flex;flex-direction:column;gap:8px;margin-bottom:36px}
+.cred-item{display:flex;align-items:center;gap:12px;padding:9px 16px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.cred-tick{color:var(--gold);font-size:.82rem;font-weight:600;flex-shrink:0}
+.cred-text{font-size:.8rem;color:rgba(255,255,255,.68)}
+.contact-details{border-top:1px solid rgba(255,255,255,.1);padding-top:28px;display:flex;flex-direction:column;gap:14px}
+.detail-item{display:flex;flex-direction:column;gap:3px}
+.detail-label{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.detail-value{font-size:.88rem;color:rgba(255,255,255,.76)}
+.detail-value a{color:var(--gold-lt);text-decoration:none}
+.detail-value a:hover{text-decoration:underline}
+.cat-dl-link{margin-top:24px;padding:14px 18px;background:rgba(200,146,42,.1);border:1px solid rgba(200,146,42,.28);
+  display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s}
+.cat-dl-link:hover{background:rgba(200,146,42,.18)}
+.cat-dl-text strong{display:block;font-size:.86rem;color:#fff;margin-bottom:2px}
+.cat-dl-text span{font-size:.76rem;color:rgba(255,255,255,.5)}
+.cat-dl-arrow{color:var(--gold);font-size:1rem}
+
+/* RIGHT PANEL */
+.contact-right{background:#fff;padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+.form-eyebrow{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--text);margin-bottom:4px}
+.form-sub{font-size:.86rem;font-weight:300;color:var(--text-lt);margin-bottom:32px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.fg label{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-lt)}
+.fg input,.fg select,.fg textarea{background:var(--cream);border:1px solid var(--border);
+  padding:10px 13px;font-size:.88rem;color:var(--text);font-family:'Jost',sans-serif;outline:none;
+  transition:border-color .2s,background .2s;-webkit-appearance:none;border-radius:0}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text-lt)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--forest);background:#fff}
+.fg textarea{resize:vertical;min-height:88px;line-height:1.6}
+.strains-label{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-lt);margin-bottom:7px;display:block}
+.strains-note{font-size:.7rem;color:var(--text-lt);margin-bottom:8px;font-style:italic}
+.strains-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;max-height:172px;overflow-y:auto;
+  border:1px solid var(--border);padding:10px;background:var(--cream);margin-bottom:16px}
+.sc{display:flex;align-items:center;gap:7px;cursor:pointer}
+.sc input[type=checkbox]{width:13px;height:13px;accent-color:var(--forest);cursor:pointer;flex-shrink:0}
+.sc span{font-size:.8rem;color:var(--text-mid)}
+.btn-submit{width:100%;background:var(--forest);color:#fff;border:none;cursor:pointer;
+  padding:15px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Jost',sans-serif;transition:background .2s;margin-top:4px}
+.btn-submit:hover{background:var(--forest-light)}
+.form-foot{margin-top:12px;font-size:.68rem;color:var(--text-lt);text-align:center;line-height:1.6}
+.success-msg{display:none;flex-direction:column;align-items:center;gap:16px;padding:48px 24px;text-align:center}
+.success-msg.show{display:flex}
+.success-icon{font-size:2.5rem}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--text)}
+.success-body{font-size:.9rem;font-weight:300;color:var(--text-mid);max-width:360px;line-height:1.7}
+
+footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.05em}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.28);font-family:'DM Mono',monospace}
+
+@media(max-width:960px){
+  nav{padding:0 24px}.nav-links a:not(.nav-cta){display:none}
+  .contact-main{grid-template-columns:1fr;padding-top:64px}
+  .contact-left,.contact-right{padding:60px 6vw}
+  .f-row{grid-template-columns:1fr}
+  .strains-grid{grid-template-columns:1fr}
+  footer{padding:32px 6vw}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">GCS Canada</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="why-us.html">Why Us</a>
+    <a href="strains.html">Strains</a>
+    <a href="contact.html" class="active nav-cta">Contact</a>
+  </div>
+</nav>
+
+<div class="contact-main">
+
+  <!-- LEFT PANEL -->
+  <div class="contact-left">
+    <div class="contact-left-bg"></div>
+    <div class="left-eyebrow">Partner Enquiry</div>
+    <h1 class="left-title">Discuss Your<br>Supply Needs</h1>
+    <p class="left-body">Partner directly with the producer. We supply bulk dried flower and oils to Australian wholesale licensees. Actively onboarding new Australian partners.</p>
+
+    <div class="cred-list">
+      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">GACP Certified Production</span></div>
+      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">TGA Supply Chain Ready</span></div>
+      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Irradiation Certified · PGR-Free</span></div>
+      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Full batch documentation on every shipment</span></div>
+      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Flexible MOQ · Trial-first entry</span></div>
+    </div>
+
+    <div class="contact-details">
+      <div class="detail-item">
+        <span class="detail-label">Official Email</span>
+        <span class="detail-value"><a href="mailto:info@gcsystems.ca">info@gcsystems.ca</a></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Website</span>
+        <span class="detail-value"><a href="https://gcsystems.ca">gcsystems.ca</a></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Origin</span>
+        <span class="detail-value">Leamington, Ontario — Canada's Premier Southern Cultivation Region</span>
+      </div>
+    </div>
+
+    <a href="strains.html#get-catalogue" class="cat-dl-link">
+      <div class="cat-dl-text">
+        <strong>2026 Strain Catalogue</strong>
+        <span>Full specifications for all 15 cultivars</span>
+      </div>
+      <span class="cat-dl-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="contact-right">
+    <div id="form-wrap">
+      <div class="form-eyebrow">Partner Enquiry Form</div>
+      <h2 class="form-title">Let's Talk Supply</h2>
+      <p class="form-sub">Tell us about your business. We respond within 1 business day.</p>
+
+      <div class="f-row">
+        <div class="fg"><label>Company Name *</label><input type="text" placeholder="Your company"></div>
+        <div class="fg"><label>Contact Name &amp; Role *</label><input type="text" placeholder="Name · Role"></div>
+      </div>
+      <div class="f-row">
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@company.com"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+61 ..."></div>
+      </div>
+      <div class="fg"><label>Licence Type</label>
+        <select>
+          <option value="">Select licence type</option>
+          <option>ODC Licence Holder / TGA Sponsor</option>
+          <option>Wholesale Distributor</option>
+          <option>Pharmacy Network</option>
+          <option>Telehealth / Clinic Platform</option>
+          <option>Exploring / Not yet licensed</option>
+        </select>
+      </div>
+
+      <span class="strains-label">Strains of Interest</span>
+      <p class="strains-note">Select all that apply — or leave blank if you'd like us to suggest a portfolio.</p>
+      <div class="strains-grid">
+        <label class="sc"><input type="checkbox"><span>Blue Dream</span></label>
+        <label class="sc"><input type="checkbox"><span>Jack Herer</span></label>
+        <label class="sc"><input type="checkbox"><span>Jealousy</span></label>
+        <label class="sc"><input type="checkbox"><span>OG Kush</span></label>
+        <label class="sc"><input type="checkbox"><span>Prism Kush</span></label>
+        <label class="sc"><input type="checkbox"><span>Afghan Kush</span></label>
+        <label class="sc"><input type="checkbox"><span>Purple Honey</span></label>
+        <label class="sc"><input type="checkbox"><span>Kush Cookies</span></label>
+        <label class="sc"><input type="checkbox"><span>Black Cherry Punch</span></label>
+        <label class="sc"><input type="checkbox"><span>AAAA Kush</span></label>
+        <label class="sc"><input type="checkbox"><span>Chapel of Love</span></label>
+        <label class="sc"><input type="checkbox"><span>True Skunk</span></label>
+        <label class="sc"><input type="checkbox"><span>Pennywise 1:1</span></label>
+        <label class="sc"><input type="checkbox"><span>ACDC</span></label>
+        <label class="sc"><input type="checkbox"><span>CBG Clarity</span></label>
+        <label class="sc"><input type="checkbox"><span>Custom cultivation enquiry</span></label>
+      </div>
+
+      <div class="fg"><label>Estimated Monthly Volume</label>
+        <select>
+          <option>Not sure yet</option>
+          <option>Under 5 kg / month</option>
+          <option>5 – 20 kg / month</option>
+          <option>20 – 100 kg / month</option>
+          <option>100 kg+ / month</option>
+        </select>
+      </div>
+      <div class="fg"><label>Specific Requirements or Questions</label>
+        <textarea placeholder="Tell us about your supply needs, target patient population, or any specific questions..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="submitForm(event)">Submit Partner Enquiry →</button>
+      <p class="form-foot">Your enquiry is sent directly to info@gcsystems.ca.<br>Full strain specifications, COA samples, and pricing available on request.</p>
+    </div>
+
+    <div class="success-msg" id="success">
+      <div class="success-icon">✓</div>
+      <h3 class="success-title">Enquiry Received</h3>
+      <p class="success-body">Thank you. We'll review your enquiry and respond within 1 business day at info@gcsystems.ca.</p>
+      <p style="font-size:.8rem;color:var(--text-lt);margin-top:8px">
+        In the meantime, <a href="strains.html" style="color:var(--gold);text-decoration:none">browse our strain catalogue.</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-logo">GCS Canada</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="why-us.html">Why Us</a>
+    <a href="strains.html">Strains</a><a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">info@gcsystems.ca · gcsystems.ca</span>
+</footer>
+
+<script>
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('form-wrap').style.display='none';
+  document.getElementById('success').classList.add('show');
+}
+</script>
+</body>
+</html>

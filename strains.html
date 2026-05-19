@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strain Catalogue — GCS Canada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#132D1E;--forest-mid:#1E4430;
+  --gold:#C8922A;--gold-lt:#E8B450;
+  --cream:#F7F4EE;--cream-dk:#EDE8DF;
+  --text:#111A0F;--text-mid:#3D5040;--text-lt:#7A8A72;
+  --border:#D8D4CC;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#fff;letter-spacing:.05em;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{background:var(--gold);color:#fff!important;padding:9px 24px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--gold-lt)!important}
+
+.page-hero{padding:140px 10vw 64px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('hero-bg.jpg') center 60% / cover no-repeat;opacity:.22;z-index:0}
+.page-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--forest) 0%,rgba(30,68,48,.95) 100%);z-index:1}
+.page-hero > *{position:relative;z-index:2}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--gold)}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:600;color:#fff;line-height:1.1}
+.hero-body{max-width:600px;margin-top:16px;font-size:.97rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.65)}
+.hero-notes{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.hero-note{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.5);padding:10px 18px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);max-width:560px}
+.hero-note a{color:var(--gold-lt);text-decoration:underline}
+.hero-note strong{color:rgba(255,255,255,.8);font-weight:500}
+
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:50;
+  padding:0 10vw;display:flex;overflow-x:auto}
+.f-btn{padding:18px 28px;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  border:none;background:transparent;cursor:pointer;white-space:nowrap;
+  color:var(--text-lt);border-bottom:2px solid transparent;transition:all .2s;font-family:'Jost',sans-serif}
+.f-btn:hover{color:var(--text)}
+.f-btn.active{color:var(--forest);border-bottom-color:var(--gold)}
+
+.catalogue{padding:60px 10vw 80px;background:var(--cream)}
+.cat-sec{margin-bottom:72px;display:none}
+.cat-sec.show{display:block}
+.sec-head{display:flex;align-items:baseline;gap:16px;padding-bottom:18px;margin-bottom:28px;border-bottom:1px solid var(--border)}
+.sec-emoji{font-size:1.3rem}
+.sec-name{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;color:var(--text)}
+.sec-desc{font-size:.78rem;color:var(--text-lt);letter-spacing:.06em}
+
+.strain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.strain-card{background:#fff;border:1px solid var(--border);padding:26px 22px 20px;
+  display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s,border-color .25s;cursor:default}
+.strain-card:hover{box-shadow:0 8px 28px rgba(19,45,30,.1);transform:translateY(-3px);border-color:var(--gold)}
+.strain-type{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-lt);padding:3px 10px;background:var(--cream);border:1px solid var(--border);
+  display:inline-block;margin-bottom:14px}
+.strain-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:8px}
+.strain-cann{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--text-lt);margin-bottom:auto}
+.strain-req{margin-top:16px;padding-top:14px;border-top:1px solid var(--cream-dk);
+  display:flex;align-items:center;justify-content:space-between}
+.req-link{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:color .2s}
+.req-link:hover{color:var(--forest)}
+.req-arrow{color:var(--border);font-size:.8rem;transition:color .2s}
+.strain-card:hover .req-arrow{color:var(--gold)}
+
+/* GATE FORM */
+.gate{background:var(--forest);padding:80px 10vw;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.gate-eyebrow{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.gate-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);font-weight:600;color:#fff;line-height:1.2;margin-bottom:14px}
+.gate-body{font-size:.93rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.6);margin-bottom:22px}
+.gate-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.gate-list li{font-size:.86rem;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:10px}
+.gate-list li::before{content:'✓';color:var(--gold);font-size:.8rem;font-weight:600}
+.gate-note{font-size:.78rem;color:rgba(255,255,255,.35);font-style:italic}
+
+.gate-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:40px 36px}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:4px}
+.form-sub{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:26px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fg label{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.fg input,.fg select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  padding:10px 13px;font-size:.87rem;color:#fff;font-family:'Jost',sans-serif;outline:none;
+  transition:border-color .2s;-webkit-appearance:none}
+.fg input::placeholder{color:rgba(255,255,255,.28)}
+.fg input:focus,.fg select:focus{border-color:var(--gold)}
+.fg select option{background:var(--forest);color:#fff}
+.btn-submit{width:100%;background:var(--gold);color:#fff;border:none;cursor:pointer;
+  padding:14px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Jost',sans-serif;transition:background .2s;margin-top:4px}
+.btn-submit:hover{background:var(--gold-lt)}
+.form-privacy{font-size:.66rem;color:rgba(255,255,255,.28);margin-top:10px;text-align:center}
+
+.custom-strip{background:var(--cream-dk);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;border-top:1px solid var(--border)}
+.custom-text{font-size:.93rem;font-weight:300;color:var(--text-mid);max-width:560px;line-height:1.7}
+.custom-text strong{color:var(--text);font-weight:500}
+.custom-link{font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;white-space:nowrap}
+
+footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.05em}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.28);font-family:'DM Mono',monospace}
+
+@media(max-width:960px){
+  nav{padding:0 24px}.nav-links a:not(.nav-cta){display:none}
+  .page-hero{padding:100px 6vw 52px}
+  .filter-bar{padding:0 6vw}
+  .catalogue{padding:48px 6vw 60px}
+  .gate{grid-template-columns:1fr;gap:48px;padding:60px 6vw}
+  .f-row{grid-template-columns:1fr}
+  .custom-strip{padding:36px 6vw}
+  footer{padding:32px 6vw}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">GCS Canada</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="why-us.html">Why Us</a>
+    <a href="strains.html" class="active">Strains</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="eyebrow">Strain Catalogue · 2026</div>
+  <h1>15 Cultivars.<br>5 Clinical Categories.</h1>
+  <p class="hero-body">Our catalogue covers 15 established cultivars across 5 clinical categories — but our capabilities extend further. Beyond the catalogue, custom cultivation and bespoke cannabinoid profiles are available for long-term partners.</p>
+  <div class="hero-notes">
+    <div class="hero-note">
+      Full specifications including cannabinoid data, terpene profiles, genetics and clinical reference data are available — request <a href="#get-catalogue">the full catalogue.</a>
+    </div>
+    <div class="hero-note">
+      Looking for something not listed? Our in-house genetics library extends beyond the published catalogue.
+      <a href="contact.html">Contact us to discuss custom cultivation.</a>
+    </div>
+  </div>
+</section>
+
+<div class="filter-bar">
+  <button class="f-btn active" data-f="all">All Strains</button>
+  <button class="f-btn" data-f="day">☀ Daytime</button>
+  <button class="f-btn" data-f="eve">🌆 Evening</button>
+  <button class="f-btn" data-f="night">🌙 Night</button>
+  <button class="f-btn" data-f="res">⭐ Reserve</button>
+  <button class="f-btn" data-f="spec">🌿 Specialty</button>
+</div>
+
+<!-- Featured quality image -->
+<div style="overflow:hidden;line-height:0;max-height:360px">
+  <img src="flower-purple.jpg"
+    alt="Premium medicinal cannabis — GCS Canada"
+    style="width:100%;height:360px;object-fit:cover;object-position:center 40%;display:block">
+</div>
+
+<div class="catalogue">
+
+  <div class="cat-sec show" data-s="day">
+    <div class="sec-head"><span class="sec-emoji">☀️</span>
+      <span class="sec-name">Daytime</span>
+      <span class="sec-desc">· Functional Relief · Cognitive Clarity</span></div>
+    <div class="strain-grid">
+      <div class="strain-card">
+        <span class="strain-type">Sativa-dominant</span>
+        <h3 class="strain-name">Blue Dream</h3>
+        <span class="strain-cann">THC-dominant · Low-CBD</span>
+        <div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div>
+      </div>
+      <div class="strain-card">
+        <span class="strain-type">Sativa-dominant</span>
+        <h3 class="strain-name">Jack Herer</h3>
+        <span class="strain-cann">THC-dominant · Low-CBD</span>
+        <div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-sec show" data-s="eve">
+    <div class="sec-head"><span class="sec-emoji">🌆</span>
+      <span class="sec-name">Evening</span>
+      <span class="sec-desc">· Versatile Relief · Day-to-Night Transition</span></div>
+    <div class="strain-grid">
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Jealousy</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">OG Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Prism Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-sec show" data-s="night">
+    <div class="sec-head"><span class="sec-emoji">🌙</span>
+      <span class="sec-name">Night</span>
+      <span class="sec-desc">· Deep Relief · Sleep · Sedation</span></div>
+    <div class="strain-grid">
+      <div class="strain-card"><span class="strain-type">Pure Indica · Afghan Landrace</span><h3 class="strain-name">Afghan Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Purple Honey</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Kush Cookies</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Hybrid</span><h3 class="strain-name">Black Cherry Punch</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-sec show" data-s="res">
+    <div class="sec-head"><span class="sec-emoji">⭐</span>
+      <span class="sec-name">Reserve</span>
+      <span class="sec-desc">· Ultra-High Potency · Severe &amp; Refractory</span></div>
+    <div class="strain-grid">
+      <div class="strain-card"><span class="strain-type">Indica</span><h3 class="strain-name">AAAA Kush</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Chapel of Love</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">Hybrid</span><h3 class="strain-name">True Skunk</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-sec show" data-s="spec">
+    <div class="sec-head"><span class="sec-emoji">🌿</span>
+      <span class="sec-name">Specialty</span>
+      <span class="sec-desc">· Balanced 1:1 · CBD · CBG · Minor Cannabinoids</span></div>
+    <div class="strain-grid">
+      <div class="strain-card"><span class="strain-type">Balanced 1:1 Hybrid</span><h3 class="strain-name">Pennywise 1:1</h3><span class="strain-cann">Balanced THC : CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">CBD-dominant · Sativa Hybrid</span><h3 class="strain-name">ACDC</h3><span class="strain-cann">High-CBD · Low-THC</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card"><span class="strain-type">CBG-dominant · Sativa Hybrid</span><h3 class="strain-name">CBG Clarity</h3><span class="strain-cann">High-CBG · Low-CBD · Minimal THC</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- GATE FORM -->
+<div class="gate" id="get-catalogue">
+  <div>
+    <div class="gate-eyebrow">Full Strain Catalogue · 2026</div>
+    <h2 class="gate-title">Complete Specifications — Available Upon Request</h2>
+    <p class="gate-body">The full catalogue includes everything you need to evaluate each cultivar — for all 15 strains across all 5 sections.</p>
+    <ul class="gate-list">
+      <li>Cannabinoid percentages (THC · CBD · CBG)</li>
+      <li>Complete terpene profiles &amp; aroma notes</li>
+      <li>Detailed genetics &amp; lineage</li>
+      <li>Clinical reference categories</li>
+      <li>Sample COA available on request</li>
+    </ul>
+    <p class="gate-note">Custom cultivation enquiries also welcome.</p>
+  </div>
+  <div class="gate-form">
+    <h3 class="form-title">Request the Full Catalogue</h3>
+    <p class="form-sub">For licensed wholesale buyers and importers only.</p>
+    <div class="f-row">
+      <div class="fg"><label>Company Name</label><input type="text" placeholder="Your company"></div>
+      <div class="fg"><label>Your Role</label><input type="text" placeholder="e.g. Procurement Manager"></div>
+    </div>
+    <div class="f-row">
+      <div class="fg"><label>Email Address</label><input type="email" placeholder="you@company.com"></div>
+      <div class="fg"><label>Country</label>
+        <select><option>Australia</option><option>New Zealand</option><option>United Kingdom</option><option>Germany</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="fg"><label>Licence Type</label>
+      <select>
+        <option value="">Select licence type</option>
+        <option>ODC Licence Holder / TGA Sponsor</option>
+        <option>Wholesale Distributor</option>
+        <option>Pharmacy Network</option>
+        <option>Telehealth / Clinic Platform</option>
+        <option>Exploring / Not yet licensed</option>
+      </select>
+    </div>
+    <div class="fg"><label>Sections of Interest</label>
+      <select><option value="">All sections</option><option>Daytime</option><option>Evening</option><option>Night</option><option>Reserve</option><option>Specialty</option></select>
+    </div>
+    <button class="btn-submit" onclick="this.textContent='✓ Request Sent — We\'ll be in touch';this.style.background='#2D6A47';this.disabled=true">Send Catalogue Request →</button>
+    <p class="form-privacy">Your enquiry is sent directly to info@gcsystems.ca. We respond within 1 business day.</p>
+  </div>
+</div>
+
+<div class="custom-strip">
+  <p class="custom-text"><strong>Custom cultivation available for long-term partners.</strong> If your portfolio requires a cultivar or cannabinoid profile not listed, we welcome a conversation about custom cultivation arrangements.</p>
+  <a href="contact.html" class="custom-link">Discuss Custom Cultivation →</a>
+</div>
+
+<footer>
+  <span class="footer-logo">GCS Canada</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="why-us.html">Why Us</a>
+    <a href="strains.html">Strains</a><a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">info@gcsystems.ca · gcsystems.ca</span>
+</footer>
+
+<script>
+document.querySelectorAll('.f-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const f=btn.dataset.f;
+    document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.cat-sec').forEach(s=>{
+      s.classList.toggle('show',f==='all'||s.dataset.s===f);
+    });
+  });
+});
+document.querySelectorAll('a[href="#get-catalogue"]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();document.getElementById('get-catalogue').scrollIntoView({behavior:'smooth'});});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why Us — GCS Canada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#132D1E;--forest-mid:#1E4430;--forest-light:#2D6A47;
+  --gold:#C8922A;--gold-lt:#E8B450;
+  --cream:#F7F4EE;--cream-dk:#EDE8DF;
+  --text:#111A0F;--text-mid:#3D5040;--text-lt:#7A8A72;
+  --border:#D8D4CC;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);
+  display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#fff;letter-spacing:.05em;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{background:var(--gold);color:#fff!important;padding:9px 24px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--gold-lt)!important}
+
+/* PAGE HERO */
+.page-hero{padding:140px 10vw 72px;background:var(--forest);position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:440px;height:440px;
+  border:1px solid rgba(200,146,42,.07);border-radius:50%;pointer-events:none}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--gold)}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);
+  font-weight:600;color:#fff;line-height:1.12;max-width:760px}
+.page-hero-intro{font-size:1rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.6);
+  max-width:580px;margin-top:18px}
+
+/* STICKY IN-PAGE NAV */
+.snav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:50;
+  display:flex;padding:0 10vw;overflow-x:auto}
+.snav a{padding:18px 0;margin-right:36px;white-space:nowrap;font-size:.7rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--text-lt);border-bottom:2px solid transparent;
+  text-decoration:none;transition:color .2s,border-color .2s;display:block}
+.snav a:hover{color:var(--text)}
+.snav a.active{color:var(--forest);border-bottom-color:var(--gold)}
+
+/* SHARED */
+.sec{padding:100px 10vw}
+.sec.white{background:#fff}
+.sec.cream{background:var(--cream)}
+.sec.dark{background:var(--forest)}
+.sec-tag{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;color:var(--text);line-height:1.2}
+.sec-title-lt{color:#fff}
+.sec-sub{font-size:.97rem;font-weight:300;line-height:1.78;color:var(--text-mid);max-width:560px;margin-top:10px}
+.sec-sub-lt{color:rgba(255,255,255,.58)}
+
+/* ── SECTION A ──────────────────────────────────────── */
+.fac-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px}
+.fac-body-text p{font-size:.95rem;font-weight:300;line-height:1.85;color:var(--text-mid)}
+.fac-body-text p+p{margin-top:16px}
+
+/* Image placeholder style */
+.img-ph{background:var(--cream-dk);border:2px dashed var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:40px 24px;text-align:center;min-height:200px}
+.img-ph-icon{font-size:2rem;opacity:.4}
+.img-ph-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-lt)}
+.img-ph-note{font-size:.72rem;color:var(--text-lt);max-width:280px;line-height:1.5}
+
+.fac-cards{display:flex;flex-direction:column;gap:2px}
+.fac-card{display:grid;grid-template-columns:64px 1fr;gap:0 16px;
+  padding:26px 28px;background:var(--cream-dk);border-left:3px solid transparent;
+  transition:border-color .2s,background .2s;align-items:start}
+.fac-card:hover{border-left-color:var(--gold);background:var(--cream)}
+.fac-tag{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+.fac-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:5px}
+.fac-body{font-size:.84rem;font-weight:300;line-height:1.65;color:var(--text-mid)}
+
+/* ── SECTION B ──────────────────────────────────────── */
+.process-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px;align-items:start}
+.process-timeline{display:flex;flex-direction:column;gap:0;
+  border-left:2px solid var(--border);margin-left:16px}
+.pt-step{display:grid;grid-template-columns:auto 1fr;gap:0 36px;padding:0 0 48px;position:relative}
+.pt-step:last-child{padding-bottom:0}
+.pt-dot{width:14px;height:14px;background:var(--cream-dk);border:2px solid var(--border);
+  border-radius:50%;margin-left:-8px;margin-top:4px;flex-shrink:0;transition:background .2s,border-color .2s}
+.pt-step:hover .pt-dot{background:var(--gold);border-color:var(--gold)}
+.pt-num{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pt-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--text);margin-bottom:8px}
+.pt-body{font-size:.88rem;font-weight:300;line-height:1.75;color:var(--text-mid);max-width:480px}
+.pt-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pt-tag{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;background:var(--cream);color:var(--text-mid);border:1px solid var(--border)}
+/* image placeholder for process section */
+.process-img-col{display:flex;flex-direction:column;gap:16px;position:sticky;top:140px}
+
+/* ── SECTION C ──────────────────────────────────────── */
+.compliance-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:56px;align-items:start}
+.doc-list{display:flex;flex-direction:column;gap:2px}
+.doc-item{display:flex;gap:16px;align-items:flex-start;padding:20px 22px;
+  background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s}
+.doc-item:hover{background:rgba(255,255,255,.1)}
+.doc-icon{width:34px;height:34px;background:rgba(200,146,42,.15);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.doc-name{font-size:.88rem;font-weight:600;color:#fff;margin-bottom:3px}
+.doc-desc{font-size:.8rem;color:rgba(255,255,255,.72);line-height:1.55}
+.cert-block{display:flex;flex-direction:column;gap:12px}
+.cert-item{padding:18px 22px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:14px}
+.cert-tick{color:var(--gold);font-size:.95rem;font-weight:700;flex-shrink:0}
+.cert-name{font-size:.88rem;font-weight:600;color:#fff}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.cert-badge{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 14px;border:1px solid rgba(200,146,42,.5);color:var(--gold-lt);background:rgba(200,146,42,.06)}
+
+/* ── SECTION D ──────────────────────────────────────── */
+.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:56px}
+.model-card{background:var(--cream);padding:42px 36px;position:relative;overflow:hidden;transition:background .2s}
+.model-card:hover{background:#fff}
+.model-card::before{content:attr(data-n);position:absolute;right:20px;top:14px;
+  font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;
+  color:var(--cream-dk);line-height:1;pointer-events:none;transition:color .2s}
+.model-card:hover::before{color:rgba(200,146,42,.1)}
+.model-tag{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.model-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.25}
+.model-body{font-size:.88rem;font-weight:300;line-height:1.78;color:var(--text-mid)}
+.model-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.model-list li{font-size:.82rem;color:var(--text-mid);display:flex;align-items:baseline;gap:8px}
+.model-list li::before{content:'·';color:var(--gold);flex-shrink:0}
+
+/* ── CAPABILITIES TABLE ─────────────────────────────── */
+.spec-wrap{padding:80px 10vw;background:var(--cream-dk)}
+.spec-intro{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start;margin-bottom:40px}
+.spec-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--text);margin-top:6px}
+.spec-sub{font-size:.93rem;font-weight:300;line-height:1.8;color:var(--text-mid)}
+table.glance{width:100%;border-collapse:collapse}
+table.glance thead tr{background:var(--forest)}
+table.glance thead th{text-align:left;padding:13px 18px;
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);font-weight:400}
+table.glance thead th:first-child{color:var(--gold-lt)}
+table.glance tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+table.glance tbody tr:hover{background:#fff}
+table.glance td{padding:13px 18px;vertical-align:top;font-size:.88rem;line-height:1.5}
+table.glance td:first-child{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+  color:var(--gold);font-weight:500;text-transform:uppercase;width:20%}
+table.glance td:nth-child(2){color:var(--text);font-weight:400;width:42%}
+table.glance td:nth-child(3){color:var(--text-lt);font-style:italic;font-weight:300;width:38%}
+
+/* CTA */
+.page-cta{background:var(--forest);padding:64px 10vw;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.page-cta-text{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;
+  font-weight:300;color:#fff;max-width:520px;line-height:1.5}
+.page-cta-text strong{font-weight:600;font-style:normal;color:var(--gold-lt)}
+.cta-btns{display:flex;gap:14px;flex-wrap:wrap}
+
+.btn-primary{background:var(--gold);color:#fff;padding:14px 32px;font-size:.76rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .2s;display:inline-block}
+.btn-primary:hover{background:var(--gold-lt)}
+.btn-ghost-sm{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);padding:14px 32px;font-size:.76rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:border-color .2s;display:inline-block}
+.btn-ghost-sm:hover{border-color:#fff;color:#fff}
+
+footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.05em}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.28);font-family:'DM Mono',monospace}
+
+@media(max-width:960px){
+  nav{padding:0 24px}.nav-links a:not(.nav-cta){display:none}
+  .page-hero{padding:100px 6vw 60px}
+  .snav{padding:0 6vw}
+  .sec{padding:72px 6vw}
+  .fac-layout,.process-wrap,.compliance-cols,.spec-intro{grid-template-columns:1fr;gap:40px}
+  .step-grid{grid-template-columns:1fr}
+  .step-card-wide{grid-column:auto}
+  section.dark > div[style*="grid-template-columns"]{grid-template-columns:1fr!important}
+  .genetics-hl{grid-template-columns:1fr;padding:40px 28px}
+  .model-grid{grid-template-columns:1fr}
+  .model-grid .model-card{border-right:none;border-bottom:1px solid var(--border)}
+  .process-img-col{position:static}
+  .spec-wrap,.page-cta{padding:60px 6vw}
+  footer{padding:32px 6vw}
+}
+
+/* ─── GENETICS HIGHLIGHT ─────────────────────────────── */
+.genetics-hl{
+  margin-top:48px;
+  background:linear-gradient(135deg,var(--forest) 0%,var(--forest-mid) 100%);
+  padding:52px 52px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+  position:relative;overflow:hidden;
+}
+.genetics-hl::before{
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:300px;height:300px;
+  border:1px solid rgba(200,146,42,.1);border-radius:50%;pointer-events:none;
+}
+.gh-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px}
+.gh-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+.gh-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;
+  color:#fff;line-height:1.2;margin-bottom:14px}
+.gh-body{font-size:.9rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,.62)}
+.gh-items{display:flex;flex-direction:column;gap:20px}
+.gh-item{display:flex;gap:18px;align-items:flex-start;
+  padding:18px 20px;background:rgba(255,255,255,.05);
+  border-left:2px solid rgba(200,146,42,.4);transition:background .2s,border-color .2s}
+.gh-item:hover{background:rgba(255,255,255,.09);border-left-color:var(--gold)}
+.gh-item-icon{font-size:1.2rem;flex-shrink:0;padding-top:2px}
+.gh-item-title{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:4px}
+.gh-item-body{font-size:.8rem;font-weight:300;line-height:1.6;color:rgba(255,255,255,.55)}
+.gh-footer{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);
+  font-size:.78rem;color:rgba(255,255,255,.35);font-style:italic}
+.gh-footer a{color:var(--gold-lt);text-decoration:none}
+.gh-footer a:hover{text-decoration:underline}
+
+/* ─── STEP GRID (2-column) ──────────────────────────── */
+.step-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--border);margin-top:52px;
+}
+.step-card{
+  background:#fff;padding:44px 40px;
+  position:relative;overflow:hidden;
+  transition:background .2s;
+}
+.step-card:hover{background:var(--cream)}
+.step-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.step-card:hover::before{transform:scaleX(1)}
+/* last card spans both columns if odd number */
+.step-card-wide{grid-column:1 / -1}
+.step-num{
+  font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:300;
+  color:var(--cream-dk);line-height:1;margin-bottom:16px;transition:color .2s;
+}
+.step-card:hover .step-num{color:rgba(200,146,42,.2)}
+.step-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;
+  color:var(--text);margin-bottom:10px;line-height:1.25;
+}
+.step-body{
+  font-size:.88rem;font-weight:300;line-height:1.75;color:var(--text-mid);
+}
+.step-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.step-tag{
+  font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 10px;
+  background:var(--cream);color:var(--text-mid);border:1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">GCS Canada</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="why-us.html" class="active">Why Us</a>
+    <a href="strains.html">Strains</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="eyebrow">Why Us</div>
+  <h1>Facility · Process · Compliance · Commercial Model</h1>
+  <p class="page-hero-intro">Four reasons our supply partners choose us — and stay. From infrastructure to documentation to how we structure a long-term relationship.</p>
+</section>
+
+<div class="snav" id="snav">
+  <a href="#facility"    class="active">A — The Facility</a>
+  <a href="#process"              >B — Craft &amp; Process</a>
+  <a href="#compliance"           >C — Testing &amp; Compliance</a>
+  <a href="#model"                >D — How We Work</a>
+  <a href="#specs"                >Capabilities Table</a>
+</div>
+
+<!-- ══ SECTION A — THE FACILITY ══════════════════════════ -->
+<section class="sec white" id="facility">
+  <div class="sec-tag">A — The Facility</div>
+  <h2 class="sec-title">Scale &amp; Infrastructure</h2>
+  <p class="sec-sub">40,000 sqm in Leamington, Ontario — Canada's southernmost growing region, combining two production environments under one quality system. Current active capacity: 1,300 kg / month, designed for 30 tonnes annually.</p>
+
+  <div class="fac-layout">
+    <div>
+      <div style="margin-bottom:32px;overflow:hidden;border-radius:0">
+        <img src="greenhouse.jpg" alt="GCS Canada hybrid greenhouse interior — cannabis cultivation at commercial scale"
+          style="width:100%;height:340px;object-fit:cover;object-position:center 30%;display:block">
+      </div>
+      <div class="fac-body-text">
+        <p>Two production environments, one quality system — every cultivar grown, processed and documented by the same team from genetics to final batch release.</p>
+      </div>
+    </div>
+    <div class="fac-cards">
+      <div class="fac-card">
+        <span class="fac-tag">Greenhouse</span>
+        <div>
+          <div class="fac-title">Micro-Environment Controlled Hybrid Greenhouse</div>
+          <p class="fac-body">Canada's southernmost grow region, operating year-round at commercial scale. Full blackout/darkening systems for precise photoperiod control and automated CO₂ injection for consistent cannabinoid expression.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <span class="fac-tag">Indoor</span>
+        <div>
+          <div class="fac-title">Precision Indoor Production</div>
+          <p class="fac-body">High-efficiency LED lighting arrays with full spectral control, and air de-contamination and filtration systems to maintain medical-grade air quality — delivering consistent, high-expression cultivars batch after batch.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <span class="fac-tag">In-house</span>
+        <div>
+          <div class="fac-title">Single Quality System, Seed to Shipment</div>
+          <p class="fac-body">Every stage from genetics to post-harvest managed by the same team, under the same system. Genetics, cultivation, post-harvest processing, and batch documentation — all in-house, with no outsourcing and no variance introduced at handoff.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ═══ GENETICS HIGHLIGHT ════════════════════════════
+       This section surfaces the in-house genetics library
+       as a core infrastructure capability — not just a
+       product list. Positioned within the Facility section
+       to frame genetics as part of the production asset base.
+  ═══════════════════════════════════════════════════════ -->
+  <div class="genetics-hl">
+    <div>
+      <div class="gh-eyebrow">In-House Genetics Library</div>
+      <h3 class="gh-title">Full Spectrum Control —<br>And Beyond the Catalogue</h3>
+      <p class="gh-body">Our genetics programme gives us direct control over cultivar selection, potency targeting and cannabinoid expression across the full clinical range. The 15 cultivars in our published catalogue represent our core offering — behind them is a deeper library that supports custom cultivation requests and minor cannabinoid cultivars unavailable through standard distribution.</p>
+      <p class="gh-footer" style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;color:rgba(255,255,255,.35);font-style:italic">
+        Custom cultivation enquiries welcome —
+        <a href="contact.html">get in touch to discuss.</a>
+      </p>
+    </div>
+    <div class="gh-items">
+      <div class="gh-item">
+        <span class="gh-item-icon">🌿</span>
+        <div>
+          <div class="gh-item-title">15 Published Cultivars Across 5 Clinical Categories</div>
+          <p class="gh-item-body">Daytime · Evening · Night · Reserve · Specialty — designed around clinical use patterns, not just cannabinoid content</p>
+        </div>
+      </div>
+      <div class="gh-item">
+        <span class="gh-item-icon">🧬</span>
+        <div>
+          <div class="gh-item-title">Custom Cultivation for Long-Term Partners</div>
+          <p class="gh-item-body">Tailored cannabinoid profiles, proprietary cultivar selection, and bespoke genetics for partners building a differentiated product portfolio</p>
+        </div>
+      </div>
+      <div class="gh-item">
+        <span class="gh-item-icon">⚗️</span>
+        <div>
+          <div class="gh-item-title">Beyond the Published Catalogue</div>
+          <p class="gh-item-body">Our genetics library extends beyond the 15 published cultivars. Custom cannabinoid profiles and cultivar selection available for long-term partners with specific portfolio requirements</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ SECTION B — CRAFT & PROCESS ═══════════════════════ -->
+<section class="sec cream" id="process">
+  <div class="sec-tag">B — Craft &amp; Process</div>
+  <h2 class="sec-title">How We Handle Every Harvest</h2>
+  <p class="sec-sub">Terpene integrity is fragile and irreplaceable. Our post-harvest process is built around one principle: preserve what the plant produced.</p>
+
+  <!-- Photo: premium cannabis flower — GCS Canada craft quality -->
+  <div style="margin-top:48px;margin-bottom:0;overflow:hidden;line-height:0">
+    <img src="flower-dark.jpg"
+      alt="GCS Canada premium medicinal cannabis flower"
+      style="width:100%;height:400px;object-fit:cover;object-position:center 35%;display:block">
+  </div>
+
+  <div class="step-grid" style="margin-top:1px">
+
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Hang-Dried</h3>
+      <p class="step-body">Every harvest is hung whole and cold-dried in temperature-controlled rooms at under 18°C. Lower temperature slows terpene volatilisation during the drying stage — preserving the aromatic and therapeutic compounds that distinguish medical-grade product from standard commercial supply.</p>
+      <div class="step-tags">
+        <span class="step-tag">Cold-dried</span>
+        <span class="step-tag">Under 18°C</span>
+        <span class="step-tag">Terpene-preserving</span>
+      </div>
+      <!-- ═══ IMAGE ZONE ══════════════════════════
+           Hang-drying room interior — flowers on
+           lines, controlled environment · 800×500px
+      ═══════════════════════════════════════════ -->
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Slow-Cured</h3>
+      <p class="step-body">Flower is slow-cured for 4–8 weeks in humidity-controlled sealed vessels — longer than industry standard. An extended cure stabilises moisture content, allows cannabinoid and terpene profiles to fully develop, and produces a product that performs consistently batch after batch.</p>
+      <div class="step-tags">
+        <span class="step-tag">4–8 weeks</span>
+        <span class="step-tag">Humidity-controlled</span>
+        <span class="step-tag">Profile stability</span>
+      </div>
+      <!-- ═══ IMAGE ZONE ══════════════════════════
+           Sealed curing vessels / curing room ·
+           800×500px
+      ═══════════════════════════════════════════ -->
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Hand-Trimmed &amp; Selected</h3>
+      <p class="step-body">All flower is trimmed and selected by hand. Machine trimming is faster — but the mechanical action damages the resin glands that hold cannabinoids and terpenes. Hand-trimming is the only method that preserves full potency and terpene expression in the final product.</p>
+      <div class="step-tags">
+        <span class="step-tag">Hand-selected</span>
+        <span class="step-tag">Resin intact</span>
+        <span class="step-tag">Premium grade</span>
+      </div>
+      <!-- ═══ IMAGE ZONE ══════════════════════════
+           Close-up: gloved hands hand-trimming
+           cannabis flower · 800×500px
+      ═══════════════════════════════════════════ -->
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h3 class="step-title">Always Fresh</h3>
+      <p class="step-body">Bi-weekly small-batch rotational cultivation means we're always harvesting. Every shipment is recently cured and freshly dispatched — what you receive was processed recently, and it shows in the product.</p>
+      <div class="step-tags">
+        <span class="step-tag">Bi-weekly harvests</span>
+        <span class="step-tag">Year-round production</span>
+        <span class="step-tag">Fresh to market</span>
+      </div>
+    </div>
+
+    <div class="step-card step-card-wide">
+      <div class="step-num">05</div>
+      <h3 class="step-title">Clean Product</h3>
+      <p class="step-body">No pesticide, herbicide, fungicide or PGR used during the entire cultivation process.</p>
+      <div class="step-tags">
+        <span class="step-tag">Zero Pesticide</span>
+        <span class="step-tag">Zero PGR</span>
+        <span class="step-tag">Batch tested by GMP Lab</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="sec dark" id="compliance">
+  <div class="sec-tag" style="color:var(--gold)">C — Testing &amp; Compliance</div>
+  <h2 class="sec-title sec-title-lt">What Ships With Every Batch</h2>
+  <p class="sec-sub sec-sub-lt">Full documentation, verified certification, TGA supply chain ready.</p>
+
+
+  <!-- GMP LAB STAMP — small flask, prominent CERTIFIED / GMP LAB text -->
+  <div style="display:flex;justify-content:flex-end;margin-bottom:32px">
+    <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
+      <!-- Outer ring -->
+      <circle cx="70" cy="70" r="66" fill="none" stroke="#C8922A" stroke-width="2.5"/>
+      <!-- Inner dashed ring -->
+      <circle cx="70" cy="70" r="55" fill="none" stroke="#C8922A" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity=".5"/>
+      <!-- Ring text -->
+      <defs>
+        <path id="coa-ring" d="M70,70 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/>
+      </defs>
+      <text font-family="DM Mono,monospace" font-size="8.5" font-weight="500" letter-spacing="4" fill="#C8922A">
+        <textPath href="#coa-ring" startOffset="1%">FULL PACKAGE COA · BATCH TESTED · </textPath>
+      </text>
+      <!-- Small flask icon — positioned in upper area, scaled down to ~40% -->
+      <g transform="translate(70,50)">
+        <path d="M-4.5,-11 L-4.5,-2 L-10,8 C-12,12 -8,14 0,14 C8,14 12,12 10,8 L4.5,-2 L4.5,-11 Z"
+          fill="none" stroke="#C8922A" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+        <line x1="-6" y1="-11" x2="6" y2="-11" stroke="#C8922A" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M-8,5 Q0,2 8,5" fill="none" stroke="#C8922A" stroke-width="1.2" opacity=".6" stroke-linecap="round"/>
+        <circle cx="-2.5" cy="-1" r="1" fill="none" stroke="#C8922A" stroke-width="1" opacity=".5"/>
+        <circle cx="3" cy="-3" r="0.8" fill="none" stroke="#C8922A" stroke-width="1" opacity=".5"/>
+      </g>
+      <!-- Divider line under flask -->
+      <line x1="44" y1="70" x2="96" y2="70" stroke="#C8922A" stroke-width="1" opacity=".4"/>
+      <!-- CERTIFIED — large, prominent -->
+      <text x="70" y="88" text-anchor="middle"
+        font-family="Cormorant Garamond,serif" font-size="13" font-weight="700"
+        fill="#C8922A" letter-spacing="2.5">CERTIFIED</text>
+      <!-- GMP LAB — clear subtitle -->
+      <text x="70" y="103" text-anchor="middle"
+        font-family="DM Mono,monospace" font-size="9" font-weight="500"
+        fill="#C8922A" letter-spacing="2">GMP LAB</text>
+    </svg>
+  </div>  <!-- merged: batch docs + certifications in one clean layout -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:12px">
+    <div>
+      <p style="font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:16px">Batch Documentation — Issued Individually Per Batch</p>
+      <div class="doc-list">
+        <div class="doc-item">
+          <div class="doc-icon">📋</div>
+          <div>
+            <div class="doc-name">Batch-Specific COA</div>
+            <p class="doc-desc">Full cannabinoid panel independently verified by GMP Lab — a dedicated COA issued for every batch</p>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">🌿</div>
+          <div>
+            <div class="doc-name">Complete Terpene Profile</div>
+            <p class="doc-desc">All major and minor terpene compounds quantified by percentage</p>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">🔬</div>
+          <div>
+            <div class="doc-name">PGR Test Results</div>
+            <p class="doc-desc">Confirmed zero pesticides, herbicides, fungicides and plant growth regulators</p>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">✅</div>
+          <div>
+            <div class="doc-name">Irradiation Certificate</div>
+            <p class="doc-desc">Post-harvest irradiation documentation required for Australian import compliance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:16px">Certifications</p>
+      <div class="cert-block">
+        <div class="cert-item"><span class="cert-tick">✓</span><div><div class="cert-name">GACP Certified</div><p style="font-size:.76rem;color:rgba(255,255,255,.62);margin-top:2px">Good Agricultural and Collection Practices</p></div></div>
+        <div class="cert-item"><span class="cert-tick">✓</span><div><div class="cert-name">Health Canada Licensed</div><p style="font-size:.76rem;color:rgba(255,255,255,.62);margin-top:2px">Standard Cultivation, Processing and Medical Sale</p></div></div>
+        <div class="cert-item"><span class="cert-tick">✓</span><div><div class="cert-name">TGA Supply Chain Ready</div><p style="font-size:.76rem;color:rgba(255,255,255,.62);margin-top:2px">Documentation structured for Australian regulatory requirements</p></div></div>
+        <div class="cert-item"><span class="cert-tick">✓</span><div><div class="cert-name">Handcraft Certified</div><p style="font-size:.76rem;color:rgba(255,255,255,.62);margin-top:2px">Hang-dried, slow-cured and hand-trimmed — every harvest</p></div></div>
+      </div>
+      <div class="badge-row">
+        <span class="cert-badge">GACP Certified</span>
+        <span class="cert-badge">Health Canada Licensed</span>
+        <span class="cert-badge">Irradiation Certified</span>
+        <span class="cert-badge">PGR-Free</span>
+        <span class="cert-badge">TGA Ready</span>
+        <span class="cert-badge">Handcraft Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION D — HOW WE WORK ════════════════════════════ -->
+<section class="sec white" id="model">
+  <div class="sec-tag">D — How We Work</div>
+  <h2 class="sec-title">Our Commercial Model</h2>
+  <p class="sec-sub">Producer-direct. Trial-first. Built for long-term partnerships, not one-off transactions.</p>
+
+  <div class="model-grid">
+    <div class="model-card" data-n="01">
+      <div class="model-tag">Pricing</div>
+      <h3 class="model-title">Producer-Direct Pricing</h3>
+      <ul class="model-list">
+        <li>Removes the layered intermediary margins from your cost structure</li>
+        <li>Premium Canadian craft quality at a pricing point designed for sustainable long-term wholesale margin</li>
+      </ul>
+    </div>
+    <div class="model-card" data-n="02">
+      <div class="model-tag">Entry</div>
+      <h3 class="model-title">Flexible MOQ.<br>Low Risk Trial.</h3>
+      <ul class="model-list">
+        <li>No minimum volume commitment to start — order what you need to validate</li>
+        <li>Test our product against your portfolio before scaling</li>
+      </ul>
+    </div>
+    <div class="model-card" data-n="03">
+      <div class="model-tag">Format</div>
+      <h3 class="model-title">Bulk or<br>Retail-Packaged</h3>
+      <ul class="model-list">
+        <li>Bulk dried flower for downstream processing and repackaging</li>
+        <li>Retail-packaged to your label and specification requirements</li>
+        <li>We work to your format — not ours</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CAPABILITIES TABLE ════════════════════════════════ -->
+<div class="spec-wrap" id="specs">
+  <div class="spec-intro">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Capabilities at a Glance</div>
+      <h2 class="spec-title">Full Specifications</h2>
+    </div>
+    <p class="spec-sub">Everything you need to evaluate us as a supply partner — in one place. For full strain specifications, request the full catalogue.</p>
+  </div>
+  <table class="glance">
+    <thead><tr>
+      <th>Specification</th><th>GCS Canada</th><th>What It Means For You</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Site</td><td>40,000 sqm · Leamington, Ontario</td><td>Canada's southernmost grow region</td></tr>
+      <tr><td>Growing Model</td><td>Micro-environment controlled hybrid greenhouse + Precision indoor (LED, air filtration)</td><td>Year-round dual-environment production</td></tr>
+      <tr><td>Current Capacity</td><td>1,300 kg dried flower / month</td><td>Reliable, uninterrupted supply</td></tr>
+      <tr><td>Designed Capacity</td><td>30 tonnes / year</td><td>Volume that scales with your growth</td></tr>
+      <tr><td>Harvest Cycle</td><td>Rotational, bi-weekly small batch</td><td>Always fresh to market</td></tr>
+      <tr><td>Processing</td><td>Hang-dried · Slow-cured · Hand-trimmed</td><td>Preserved terpene integrity</td></tr>
+      <tr><td>Clean Cultivation</td><td>Zero pesticide, herbicide, fungicide &amp; PGR</td><td>Batch tested by GMP Lab</td></tr>
+      <tr><td>Portfolio</td><td>High-THC · 1:1 · CBD-dominant · CBG · THCV on request</td><td>Full clinical spectrum from one supplier</td></tr>
+      <tr><td>Testing</td><td>Full COA + terpene profile + PGR test + irradiation cert · GMP Lab</td><td>Verified batch performance</td></tr>
+      <tr><td>Compliance</td><td>GACP certified · Irradiation by TERIS Applied Sterilization Technologies ULC</td><td>TGA supply chain ready</td></tr>
+      <tr><td>Entry</td><td>Flexible MOQ, trial-first</td><td>Low-risk validation before volume commitment</td></tr>
+      <tr><td>Format</td><td>Dried flower — bulk or retail-packaged</td><td>Fits your supply chain workflow</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-cta">
+  <p class="page-cta-text"><strong>Full catalogue</strong> with strain specifications including cannabinoid data, terpene profiles and genetics — available upon request.</p>
+  <div class="cta-btns">
+    <a href="contact.html" class="btn-primary">Request Full Catalogue</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">GCS Canada</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="why-us.html">Why Us</a>
+    <a href="strains.html">Strains</a><a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">info@gcsystems.ca · gcsystems.ca</span>
+</footer>
+
+<script>
+const snavLinks=document.querySelectorAll('.snav a');
+const secs=['facility','process','compliance','model','specs'];
+function upSnav(){
+  let cur='';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=130)cur=id;});
+  snavLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+}
+window.addEventListener('scroll',upSnav,{passive:true});
+</script>
+</body>
+</html>
