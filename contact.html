@@ -9,7 +9,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --forest:#132D1E;--forest-mid:#1E4430;--forest-light:#2D6A47;
+  --forest:#1B3F2A;--forest-mid:#234C35;--forest-light:#2D6A47;
   --gold:#C8922A;--gold-lt:#E8B450;
   --cream:#F7F4EE;--cream-dk:#EDE8DF;
   --text:#111A0F;--text-mid:#3D5040;--text-lt:#7A8A72;
@@ -103,6 +103,11 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
   .strains-grid{grid-template-columns:1fr}
   footer{padding:32px 6vw}
 }
+
+.beyond-catalog{background:rgba(200,146,42,.06);border:1px solid rgba(200,146,42,.2);
+  padding:4px 8px;margin-top:2px}
+.beyond-catalog span{color:var(--gold);font-weight:500}
+.custom-cult{background:rgba(200,146,42,.1);border-color:rgba(200,146,42,.3)}
 </style>
 </head>
 <body>
@@ -124,15 +129,7 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
     <div class="contact-left-bg"></div>
     <div class="left-eyebrow">Partner Enquiry</div>
     <h1 class="left-title">Discuss Your<br>Supply Needs</h1>
-    <p class="left-body">Partner directly with the producer. We supply bulk dried flower and oils to Australian wholesale licensees. Actively onboarding new Australian partners.</p>
 
-    <div class="cred-list">
-      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">GACP Certified Production</span></div>
-      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">TGA Supply Chain Ready</span></div>
-      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Irradiation Certified · PGR-Free</span></div>
-      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Full batch documentation on every shipment</span></div>
-      <div class="cred-item"><span class="cred-tick">✓</span><span class="cred-text">Flexible MOQ · Trial-first entry</span></div>
-    </div>
 
     <div class="contact-details">
       <div class="detail-item">
@@ -161,78 +158,74 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
   <!-- RIGHT PANEL -->
   <div class="contact-right">
     <div id="form-wrap">
+    <form id="contact-form" style="display:contents">
       <div class="form-eyebrow">Partner Enquiry Form</div>
-      <h2 class="form-title">Let's Talk Supply</h2>
-      <p class="form-sub">Tell us about your business. We respond within 1 business day.</p>
+      <h2 class="form-title">Let's Talk Your Needs</h2>
+      <p class="form-sub">Tell us about your business and supply needs.</p>
 
-      <form id="contact-form" action="https://formspree.io/f/xredbwkj" method="POST">
+      <div class="f-row">
+        <div class="fg"><label>Company Name *</label><input type="text" placeholder="Your company" name="company"></div>
+        <div class="fg"><label>Contact Name &amp; Role *</label><input type="text" placeholder="Name · Role" name="name_role"></div>
+      </div>
+      <div class="f-row">
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@company.com" name="email"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+61 ..." name="phone"></div>
+      </div>
+      <div class="fg"><label>Licence Type</label>
+        <select name="licence_type">
+          <option value="">Select licence type</option>
+          <option>ODC Licence Holder / TGA Sponsor</option>
+          <option>Wholesale Distributor</option>
+          <option>Pharmacy Network</option>
+          <option>Telehealth / Clinic Platform</option>
+          <option>Exploring / Not yet licensed</option>
+        </select>
+      </div>
 
-        <!-- 告诉 Formspree 提交后不要跳走，由 JS 处理 -->
-        <input type="hidden" name="_format" value="plain">
+      <span class="strains-label">Strains of Interest</span>
+      <p class="strains-note">Select all that apply — or leave blank if you'd like us to suggest a portfolio.</p>
+      <div class="strains-grid">
+        <label class="sc"><input type="checkbox" name="strains" value="Blue Dream"><span>Blue Dream</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Jack Herer"><span>Jack Herer</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Jealousy"><span>Jealousy</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="OG Kush"><span>OG Kush</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Prism Kush"><span>Prism Kush</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Afghan Kush"><span>Afghan Kush</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Purple Honey"><span>Purple Honey</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Kush Cookies"><span>Kush Cookies</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Black Cherry Punch"><span>Black Cherry Punch</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="AAAA Kush"><span>AAAA Kush</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Chapel of Love"><span>Chapel of Love</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="True Skunk"><span>True Skunk</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="Pennywise 1:1"><span>Pennywise 1:1</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="ACDC"><span>ACDC</span></label>
+        <label class="sc"><input type="checkbox" name="strains" value="CBG Clarity"><span>CBG Clarity</span></label>
+        <label class="sc check-item beyond-catalog"><input type="checkbox" name="strains" value="Other strain beyond catalogue"><span>Other strain beyond catalogue</span></label>
+        <label class="sc check-item beyond-catalog custom-cult"><input type="checkbox" name="strains" value="Custom cultivation enquiry"><span>Custom cultivation enquiry</span></label>
+      </div>
 
-        <div class="f-row">
-          <div class="fg"><label>Company Name *</label><input type="text" name="company_name" placeholder="Your company" required></div>
-          <div class="fg"><label>Contact Name &amp; Role *</label><input type="text" name="contact_name_role" placeholder="Name · Role" required></div>
-        </div>
-        <div class="f-row">
-          <div class="fg"><label>Email Address *</label><input type="email" name="email" placeholder="you@company.com" required></div>
-          <div class="fg"><label>Phone Number</label><input type="tel" name="phone" placeholder="+61 ..."></div>
-        </div>
-        <div class="fg"><label>Licence Type</label>
-          <select name="licence_type">
-            <option value="">Select licence type</option>
-            <option>ODC Licence Holder / TGA Sponsor</option>
-            <option>Wholesale Distributor</option>
-            <option>Pharmacy Network</option>
-            <option>Telehealth / Clinic Platform</option>
-            <option>Exploring / Not yet licensed</option>
-          </select>
-        </div>
+      <div class="fg"><label>Estimated Monthly Volume</label>
+        <select name="monthly_volume">
+          <option>Not sure yet</option>
+          <option>Under 5 kg / month</option>
+          <option>5 – 20 kg / month</option>
+          <option>20 – 100 kg / month</option>
+          <option>100 kg+ / month</option>
+        </select>
+      </div>
+      <div class="fg"><label>Specific Requirements or Questions</label>
+        <textarea name="requirements" placeholder="Tell us about your supply needs, target patient population, or any specific questions..."></textarea>
+      </div>
 
-        <span class="strains-label">Strains of Interest</span>
-        <p class="strains-note">Select all that apply — or leave blank if you'd like us to suggest a portfolio.</p>
-        <div class="strains-grid">
-          <label class="sc"><input type="checkbox" name="strains" value="Blue Dream"><span>Blue Dream</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Jack Herer"><span>Jack Herer</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Jealousy"><span>Jealousy</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="OG Kush"><span>OG Kush</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Prism Kush"><span>Prism Kush</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Afghan Kush"><span>Afghan Kush</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Purple Honey"><span>Purple Honey</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Kush Cookies"><span>Kush Cookies</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Black Cherry Punch"><span>Black Cherry Punch</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="AAAA Kush"><span>AAAA Kush</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Chapel of Love"><span>Chapel of Love</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="True Skunk"><span>True Skunk</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Pennywise 1:1"><span>Pennywise 1:1</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="ACDC"><span>ACDC</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="CBG Clarity"><span>CBG Clarity</span></label>
-          <label class="sc"><input type="checkbox" name="strains" value="Custom cultivation enquiry"><span>Custom cultivation enquiry</span></label>
-        </div>
-
-        <div class="fg"><label>Estimated Monthly Volume</label>
-          <select name="monthly_volume">
-            <option>Not sure yet</option>
-            <option>Under 5 kg / month</option>
-            <option>5 – 20 kg / month</option>
-            <option>20 – 100 kg / month</option>
-            <option>100 kg+ / month</option>
-          </select>
-        </div>
-        <div class="fg"><label>Specific Requirements or Questions</label>
-          <textarea name="message" placeholder="Tell us about your supply needs, target patient population, or any specific questions..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">Submit Partner Enquiry →</button>
-        <p class="form-foot">Your enquiry is sent directly to info@gcsystems.ca.<br>Full strain specifications, COA samples, and pricing available on request.</p>
-
-      </form>
+      <button class="btn-submit" type="button" onclick="submitForm(event)">Submit Partner Enquiry →</button>
+      <p class="form-foot">Your enquiry is sent directly to info@gcsystems.ca.<br>Full strain specifications, COA samples, and pricing available on request.</p>
+    </form>
     </div>
 
     <div class="success-msg" id="success">
       <div class="success-icon">✓</div>
       <h3 class="success-title">Enquiry Received</h3>
-      <p class="success-body">Thank you. We'll review your enquiry and respond within 1 business day at info@gcsystems.ca.</p>
+      <p class="success-body">Thank you. We'll review your enquiry and be in touch at info@gcsystems.ca.</p>
       <p style="font-size:.8rem;color:var(--text-lt);margin-top:8px">
         In the meantime, <a href="strains.html" style="color:var(--gold);text-decoration:none">browse our strain catalogue.</a>
       </p>
@@ -251,28 +244,47 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
 </footer>
 
 <script>
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
+async function submitForm(e) {
   e.preventDefault();
-  const form = e.target;
+  const btn = e.target;
+  const originalText = btn.textContent;
+
+  // Validate required fields
+  const company = document.querySelector('[name="company"]').value.trim();
+  const nameRole = document.querySelector('[name="name_role"]').value.trim();
+  const email = document.querySelector('[name="email"]').value.trim();
+  if (!company || !nameRole || !email) {
+    alert('Please fill in Company Name, Contact Name & Role, and Email Address.');
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  // Collect form data
+  const form = document.getElementById('contact-form');
   const data = new FormData(form);
 
   try {
-    const response = await fetch('https://formspree.io/f/xredbwkj', {
+    const res = await fetch('https://formspree.io/f/xredbwkj', {
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
     });
-
-    if (response.ok) {
+    if (res.ok) {
       document.getElementById('form-wrap').style.display = 'none';
       document.getElementById('success').classList.add('show');
     } else {
-      alert('Something went wrong. Please email us directly at info@gcsystems.ca');
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('There was a problem sending your enquiry. Please email us directly: info@gcsystems.ca');
     }
-  } catch(err) {
-    alert('Something went wrong. Please email us directly at info@gcsystems.ca');
+  } catch (err) {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert('There was a problem sending your enquiry. Please email us directly: info@gcsystems.ca');
   }
-});
+}
 </script>
 </body>
 </html>

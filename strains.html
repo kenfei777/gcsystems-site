@@ -9,7 +9,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --forest:#132D1E;--forest-mid:#1E4430;
+  --forest:#1B3F2A;--forest-mid:#234C35;
   --gold:#C8922A;--gold-lt:#E8B450;
   --cream:#F7F4EE;--cream-dk:#EDE8DF;
   --text:#111A0F;--text-mid:#3D5040;--text-lt:#7A8A72;
@@ -53,8 +53,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);dis
 .cat-sec.show{display:block}
 .sec-head{display:flex;align-items:baseline;gap:16px;padding-bottom:18px;margin-bottom:28px;border-bottom:1px solid var(--border)}
 .sec-emoji{font-size:1.3rem}
-.sec-name{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;color:var(--text)}
-.sec-desc{font-size:.78rem;color:var(--text-lt);letter-spacing:.06em}
+.sec-name{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;color:var(--text)}
+.sec-desc{font-size:.85rem;color:var(--text-mid);letter-spacing:.05em;font-weight:400}
 
 .strain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .strain-card{background:#fff;border:1px solid var(--border);padding:26px 22px 20px;
@@ -98,19 +98,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);dis
   padding:14px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   font-family:'Jost',sans-serif;transition:background .2s;margin-top:4px}
 .btn-submit:hover{background:var(--gold-lt)}
-.form-privacy{font-size:.66rem;color:rgba(255,255,255,.28);margin-top:10px;text-align:center}
+.form-privacy{font-size:.74rem;color:rgba(255,255,255,.58);margin-top:10px;text-align:center}
 
 .custom-strip{background:var(--cream-dk);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;border-top:1px solid var(--border)}
-.custom-text{font-size:.93rem;font-weight:300;color:var(--text-mid);max-width:560px;line-height:1.7}
+.custom-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;
+  display:flex;align-items:center;gap:10px}
+.custom-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold)}
+.custom-content{max-width:560px}
+.custom-text{font-size:.93rem;font-weight:300;color:var(--text-mid);line-height:1.7}
 .custom-text strong{color:var(--text);font-weight:500}
 .custom-link{font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;white-space:nowrap}
 
 footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);padding:40px 10vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.05em}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.82);letter-spacing:.05em}
 .footer-links{display:flex;gap:28px;flex-wrap:wrap}
-.footer-links a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.footer-links a{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:rgba(255,255,255,.8)}
-.footer-copy{font-size:.68rem;color:rgba(255,255,255,.28);font-family:'DM Mono',monospace}
+.footer-copy{font-size:.70rem;color:rgba(255,255,255,.52);font-family:'DM Mono',monospace}
 
 @media(max-width:960px){
   nav{padding:0 24px}.nav-links a:not(.nav-cta){display:none}
@@ -138,8 +143,8 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
 
 <section class="page-hero">
   <div class="eyebrow">Strain Catalogue · 2026</div>
-  <h1>15 Cultivars.<br>5 Clinical Categories.</h1>
-  <p class="hero-body">Our catalogue covers 15 established cultivars across 5 clinical categories — but our capabilities extend further. Beyond the catalogue, custom cultivation and bespoke cannabinoid profiles are available for long-term partners.</p>
+  <h1>15 Cultivars.<br>5 Strain Categories.</h1>
+  <p class="hero-body">Our catalogue covers 15 established cultivars across 5 strain categories — but our capabilities extend further. Beyond the catalogue, custom cultivation and bespoke cannabinoid profiles are available for long-term partners.</p>
   <div class="hero-notes">
     <div class="hero-note">
       Full specifications including cannabinoid data, terpene profiles, genetics and clinical reference data are available — request <a href="#get-catalogue">the full catalogue.</a>
@@ -153,11 +158,11 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
 
 <div class="filter-bar">
   <button class="f-btn active" data-f="all">All Strains</button>
+  <button class="f-btn" data-f="spec">🌿 Specialty</button>
+  <button class="f-btn" data-f="res">⭐ Reserve</button>
   <button class="f-btn" data-f="day">☀ Daytime</button>
   <button class="f-btn" data-f="eve">🌆 Evening</button>
   <button class="f-btn" data-f="night">🌙 Night</button>
-  <button class="f-btn" data-f="res">⭐ Reserve</button>
-  <button class="f-btn" data-f="spec">🌿 Specialty</button>
 </div>
 
 <!-- Featured quality image -->
@@ -169,123 +174,171 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
 
 <div class="catalogue">
 
-  <div class="cat-sec show" data-s="day">
-    <div class="sec-head"><span class="sec-emoji">☀️</span>
-      <span class="sec-name">Daytime</span>
-      <span class="sec-desc">· Functional Relief · Cognitive Clarity</span></div>
+  <!-- SPECIALTY -->
+  <div class="cat-sec show" data-s="spec">
+    <div class="sec-head">
+      <span class="sec-emoji">🌿</span>
+      <span class="sec-name">Specialty</span>
+      <span class="sec-desc">· Balanced 1:1 · CBD-dominant · CBG-dominant · THCV</span>
+    </div>
     <div class="strain-grid">
-      <div class="strain-card">
+      <div class="strain-card" data-cat="spec">
+        <span class="strain-type">Balanced 1:1 Hybrid</span>
+        <h3 class="strain-name">Pennywise 1:1</h3>
+        <p class="strain-profile">Balanced THC : CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="spec">
+        <span class="strain-type">CBD-dominant · Sativa Hybrid</span>
+        <h3 class="strain-name">ACDC</h3>
+        <p class="strain-profile">High-CBD · Low-THC</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="spec">
+        <span class="strain-type">CBG-dominant · Sativa Hybrid</span>
+        <h3 class="strain-name">CBG Clarity</h3>
+        <p class="strain-profile">High-CBG · Low-CBD · Minimal THC</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVE -->
+  <div class="cat-sec show" data-s="res">
+    <div class="sec-head">
+      <span class="sec-emoji">⭐</span>
+      <span class="sec-name">Reserve</span>
+      <span class="sec-desc">· Ultra-high potency</span>
+    </div>
+    <div class="strain-grid">
+      <div class="strain-card" data-cat="res">
+        <span class="strain-type">Indica</span>
+        <h3 class="strain-name">AAAA Kush</h3>
+        <p class="strain-profile">Ultra-High THC · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="res">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">Chapel of Love</h3>
+        <p class="strain-profile">Ultra-High THC · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="res">
+        <span class="strain-type">Hybrid</span>
+        <h3 class="strain-name">True Skunk</h3>
+        <p class="strain-profile">Ultra-High THC · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAYTIME -->
+  <div class="cat-sec show" data-s="day">
+    <div class="sec-head">
+      <span class="sec-emoji">☀️</span>
+      <span class="sec-name">Daytime</span>
+      <span class="sec-desc">· Sativa-dominant · High-THC</span>
+    </div>
+    <div class="strain-grid">
+      <div class="strain-card" data-cat="day">
         <span class="strain-type">Sativa-dominant</span>
         <h3 class="strain-name">Blue Dream</h3>
-        <span class="strain-cann">THC-dominant · Low-CBD</span>
-        <div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
       </div>
-      <div class="strain-card">
+      <div class="strain-card" data-cat="day">
         <span class="strain-type">Sativa-dominant</span>
         <h3 class="strain-name">Jack Herer</h3>
-        <span class="strain-cann">THC-dominant · Low-CBD</span>
-        <div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
       </div>
     </div>
   </div>
 
+  <!-- EVENING -->
   <div class="cat-sec show" data-s="eve">
-    <div class="sec-head"><span class="sec-emoji">🌆</span>
+    <div class="sec-head">
+      <span class="sec-emoji">🌆</span>
       <span class="sec-name">Evening</span>
-      <span class="sec-desc">· Versatile Relief · Day-to-Night Transition</span></div>
+      <span class="sec-desc">· Indica-dominant · High-THC</span>
+    </div>
     <div class="strain-grid">
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Jealousy</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">OG Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Prism Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card" data-cat="eve">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">Jealousy</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="eve">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">OG Kush</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="eve">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">Prism Kush</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
     </div>
   </div>
 
+  <!-- NIGHT -->
   <div class="cat-sec show" data-s="night">
-    <div class="sec-head"><span class="sec-emoji">🌙</span>
+    <div class="sec-head">
+      <span class="sec-emoji">🌙</span>
       <span class="sec-name">Night</span>
-      <span class="sec-desc">· Deep Relief · Sleep · Sedation</span></div>
+      <span class="sec-desc">· High-potency Indica</span>
+    </div>
     <div class="strain-grid">
-      <div class="strain-card"><span class="strain-type">Pure Indica · Afghan Landrace</span><h3 class="strain-name">Afghan Kush</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Purple Honey</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Kush Cookies</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Hybrid</span><h3 class="strain-name">Black Cherry Punch</h3><span class="strain-cann">THC-dominant · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
+      <div class="strain-card" data-cat="night">
+        <span class="strain-type">Pure Indica · Afghan Landrace</span>
+        <h3 class="strain-name">Afghan Kush</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="night">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">Purple Honey</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="night">
+        <span class="strain-type">Indica-dominant</span>
+        <h3 class="strain-name">Kush Cookies</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
+      <div class="strain-card" data-cat="night">
+        <span class="strain-type">Hybrid</span>
+        <h3 class="strain-name">Black Cherry Punch</h3>
+        <p class="strain-profile">THC-dominant · Low-CBD</p>
+        <div class="strain-divider"></div>
+        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+      </div>
     </div>
   </div>
-
-  <div class="cat-sec show" data-s="res">
-    <div class="sec-head"><span class="sec-emoji">⭐</span>
-      <span class="sec-name">Reserve</span>
-      <span class="sec-desc">· Ultra-High Potency · Severe &amp; Refractory</span></div>
-    <div class="strain-grid">
-      <div class="strain-card"><span class="strain-type">Indica</span><h3 class="strain-name">AAAA Kush</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Indica-dominant</span><h3 class="strain-name">Chapel of Love</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">Hybrid</span><h3 class="strain-name">True Skunk</h3><span class="strain-cann">Ultra-High THC · Low-CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-    </div>
-  </div>
-
-  <div class="cat-sec show" data-s="spec">
-    <div class="sec-head"><span class="sec-emoji">🌿</span>
-      <span class="sec-name">Specialty</span>
-      <span class="sec-desc">· Balanced 1:1 · CBD · CBG · Minor Cannabinoids</span></div>
-    <div class="strain-grid">
-      <div class="strain-card"><span class="strain-type">Balanced 1:1 Hybrid</span><h3 class="strain-name">Pennywise 1:1</h3><span class="strain-cann">Balanced THC : CBD</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">CBD-dominant · Sativa Hybrid</span><h3 class="strain-name">ACDC</h3><span class="strain-cann">High-CBD · Low-THC</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-      <div class="strain-card"><span class="strain-type">CBG-dominant · Sativa Hybrid</span><h3 class="strain-name">CBG Clarity</h3><span class="strain-cann">High-CBG · Low-CBD · Minimal THC</span><div class="strain-req"><a href="#get-catalogue" class="req-link">Request Specs</a><span class="req-arrow">→</span></div></div>
-    </div>
-  </div>
-
-</div>
-
-<!-- GATE FORM -->
-<div class="gate" id="get-catalogue">
-  <div>
-    <div class="gate-eyebrow">Full Strain Catalogue · 2026</div>
-    <h2 class="gate-title">Complete Specifications — Available Upon Request</h2>
-    <p class="gate-body">The full catalogue includes everything you need to evaluate each cultivar — for all 15 strains across all 5 sections.</p>
-    <ul class="gate-list">
-      <li>Cannabinoid percentages (THC · CBD · CBG)</li>
-      <li>Complete terpene profiles &amp; aroma notes</li>
-      <li>Detailed genetics &amp; lineage</li>
-      <li>Clinical reference categories</li>
-      <li>Sample COA available on request</li>
-    </ul>
-    <p class="gate-note">Custom cultivation enquiries also welcome.</p>
-  </div>
-  <div class="gate-form">
-    <h3 class="form-title">Request the Full Catalogue</h3>
-    <p class="form-sub">For licensed wholesale buyers and importers only.</p>
-    <form id="catalogue-form" action="https://formspree.io/f/xredbwkj" method="POST">
-      <div class="f-row">
-        <div class="fg"><label>Company Name</label><input type="text" name="company_name" placeholder="Your company" required></div>
-        <div class="fg"><label>Your Role</label><input type="text" name="your_role" placeholder="e.g. Procurement Manager"></div>
-      </div>
-      <div class="f-row">
-        <div class="fg"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required></div>
-        <div class="fg"><label>Country</label>
-          <select name="country"><option>Australia</option><option>New Zealand</option><option>United Kingdom</option><option>Germany</option><option>Other</option></select>
-        </div>
-      </div>
-      <div class="fg"><label>Licence Type</label>
-        <select name="licence_type">
-          <option value="">Select licence type</option>
-          <option>ODC Licence Holder / TGA Sponsor</option>
-          <option>Wholesale Distributor</option>
-          <option>Pharmacy Network</option>
-          <option>Telehealth / Clinic Platform</option>
-          <option>Exploring / Not yet licensed</option>
-        </select>
-      </div>
-      <div class="fg"><label>Sections of Interest</label>
-        <select name="sections_of_interest"><option value="">All sections</option><option>Daytime</option><option>Evening</option><option>Night</option><option>Reserve</option><option>Specialty</option></select>
-      </div>
-      <button type="submit" class="btn-submit" id="cat-btn">Send Catalogue Request →</button>
-      <p class="form-privacy">Your enquiry is sent directly to info@gcsystems.ca. We respond within 1 business day.</p>
-    </form>
-  </div>
-</div>
 
 <div class="custom-strip">
-  <p class="custom-text"><strong>Custom cultivation available for long-term partners.</strong> If your portfolio requires a cultivar or cannabinoid profile not listed, we welcome a conversation about custom cultivation arrangements.</p>
+  <div class="custom-content">
+    <p class="custom-eyebrow">Beyond the Catalogue</p>
+    <p class="custom-text"><strong>Custom cultivation available for long-term partners.</strong> If your portfolio requires a cultivar or cannabinoid profile not listed, we welcome a conversation about custom cultivation arrangements.</p>
+  </div>
   <a href="contact.html" class="custom-link">Discuss Custom Cultivation →</a>
 </div>
 
@@ -299,28 +352,6 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
 </footer>
 
 <script>
-document.getElementById('catalogue-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('cat-btn');
-  const data = new FormData(e.target);
-  try {
-    const response = await fetch('https://formspree.io/f/xredbwkj', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (response.ok) {
-      btn.textContent = '✓ Request Sent — We\'ll be in touch';
-      btn.style.background = '#2D6A47';
-      btn.disabled = true;
-    } else {
-      alert('Something went wrong. Please email us at info@gcsystems.ca');
-    }
-  } catch(err) {
-    alert('Something went wrong. Please email us at info@gcsystems.ca');
-  }
-});
-
 document.querySelectorAll('.f-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const f=btn.dataset.f;
@@ -334,6 +365,37 @@ document.querySelectorAll('.f-btn').forEach(btn=>{
 document.querySelectorAll('a[href="#get-catalogue"]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();document.getElementById('get-catalogue').scrollIntoView({behavior:'smooth'});});
 });
+</script>
+
+<script>
+async function submitGate(e) {
+  const btn = document.getElementById('gate-btn');
+  const email = document.querySelector('#gate-form [name="email"]');
+  if (!email || !email.value.trim()) {
+    alert('Please enter your email address.');
+    return;
+  }
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  const data = new FormData(document.getElementById('gate-form'));
+  try {
+    const res = await fetch('https://formspree.io/f/xredbwkj', {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      btn.textContent = "✓ Request Sent — We'll be in touch";
+      btn.style.background = '#2D6A47';
+    } else {
+      btn.textContent = 'Send Catalogue Request →';
+      btn.disabled = false;
+      alert('Problem sending. Please email: info@gcsystems.ca');
+    }
+  } catch {
+    btn.textContent = 'Send Catalogue Request →';
+    btn.disabled = false;
+    alert('Problem sending. Please email: info@gcsystems.ca');
+  }
+}
 </script>
 </body>
 </html>
