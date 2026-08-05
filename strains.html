@@ -66,7 +66,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);dis
 .strain-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:8px}
 .strain-cann{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--text-lt);margin-bottom:auto}
 .strain-req{margin-top:16px;padding-top:14px;border-top:1px solid var(--cream-dk);
-  display:flex;align-items:center;justify-content:space-between}
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:.68rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-lt);text-decoration:none;transition:color .2s}
+.strain-req:hover{color:var(--gold)}
+.strain-req span{transition:transform .2s}
+.strain-req:hover span{transform:translateX(3px)}
 .req-link{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:color .2s}
 .req-link:hover{color:var(--forest)}
 .req-arrow{color:var(--border);font-size:.8rem;transition:color .2s}
@@ -150,8 +156,8 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
       Full specifications including cannabinoid data, terpene profiles, genetics and clinical reference data are available — request <a href="#get-catalogue">the full catalogue.</a>
     </div>
     <div class="hero-note">
-      Looking for something not listed? Our in-house genetics library extends beyond the published catalogue.
-      <a href="contact.html">Contact us to discuss custom cultivation.</a>
+      Many of our cultivars are kept in continuous rotation and available for near-term supply — the specific range shifts with market and partner demand. Tell us what you need and we'll confirm current availability. For cultivars beyond the published catalogue, custom cultivation is available for long-term partners.
+      <a href="contact.html">Contact us to check availability or discuss custom cultivation.</a>
     </div>
   </div>
 </section>
@@ -187,21 +193,21 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
         <h3 class="strain-name">Pennywise 1:1</h3>
         <p class="strain-profile">Balanced THC : CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Pennywise 1:1">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="spec">
         <span class="strain-type">CBD-dominant · Sativa Hybrid</span>
         <h3 class="strain-name">ACDC</h3>
         <p class="strain-profile">High-CBD · Low-THC</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="ACDC">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="spec">
         <span class="strain-type">CBG-dominant · Sativa Hybrid</span>
         <h3 class="strain-name">CBG Clarity</h3>
         <p class="strain-profile">High-CBG · Low-CBD · Minimal THC</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="CBG Clarity">Enquire <span>→</span></a>
       </div>
     </div>
   </div>
@@ -219,21 +225,21 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
         <h3 class="strain-name">AAAA Kush</h3>
         <p class="strain-profile">Ultra-High THC · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="AAAA Kush">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="res">
         <span class="strain-type">Indica-dominant</span>
         <h3 class="strain-name">Chapel of Love</h3>
         <p class="strain-profile">Ultra-High THC · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Chapel of Love">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="res">
         <span class="strain-type">Hybrid</span>
         <h3 class="strain-name">True Skunk</h3>
         <p class="strain-profile">Ultra-High THC · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="True Skunk">Enquire <span>→</span></a>
       </div>
     </div>
   </div>
@@ -251,14 +257,14 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
         <h3 class="strain-name">Blue Dream</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Blue Dream">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="day">
         <span class="strain-type">Sativa-dominant</span>
         <h3 class="strain-name">Jack Herer</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Jack Herer">Enquire <span>→</span></a>
       </div>
     </div>
   </div>
@@ -276,21 +282,21 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
         <h3 class="strain-name">Jealousy</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Jealousy">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="eve">
         <span class="strain-type">Indica-dominant</span>
         <h3 class="strain-name">OG Kush</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="OG Kush">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="eve">
         <span class="strain-type">Indica-dominant</span>
         <h3 class="strain-name">Prism Kush</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Prism Kush">Enquire <span>→</span></a>
       </div>
     </div>
   </div>
@@ -308,36 +314,101 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.07);paddi
         <h3 class="strain-name">Afghan Kush</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Afghan Kush">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="night">
         <span class="strain-type">Indica-dominant</span>
         <h3 class="strain-name">Purple Honey</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Purple Honey">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="night">
         <span class="strain-type">Indica-dominant</span>
         <h3 class="strain-name">Kush Cookies</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Kush Cookies">Enquire <span>→</span></a>
       </div>
       <div class="strain-card" data-cat="night">
         <span class="strain-type">Hybrid</span>
         <h3 class="strain-name">Black Cherry Punch</h3>
         <p class="strain-profile">THC-dominant · Low-CBD</p>
         <div class="strain-divider"></div>
-        <a href="#get-catalogue" class="strain-req">Request Specs <span>→</span></a>
+        <a href="#get-catalogue" class="strain-req" data-strain="Black Cherry Punch">Enquire <span>→</span></a>
       </div>
     </div>
   </div>
 
+<!-- ══ GATE FORM — Request the Catalogue ══════════════════════ -->
+<div class="gate" id="get-catalogue">
+  <div class="gate-left">
+    <div class="gate-eyebrow">Request the Catalogue</div>
+    <h2 class="gate-title">Full specifications, on request.</h2>
+    <p class="gate-body">Our complete 2026 catalogue includes cannabinoid data, terpene profiles, genetics and clinical reference data for all 15 cultivars.</p>
+    <ul class="gate-list">
+      <li>Full cannabinoid &amp; terpene profiles</li>
+      <li>Genetics &amp; lineage detail</li>
+      <li>Clinical reference data</li>
+      <li>Batch testing &amp; compliance documentation</li>
+    </ul>
+    <p class="gate-note">Available to licensed healthcare professionals and authorised B2B partners.</p>
+  </div>
+
+  <div class="gate-form" id="gate-form-wrap">
+    <form id="gate-form" onsubmit="event.preventDefault(); submitGate(event);">
+      <input type="hidden" name="source" value="Strains — Catalogue Request">
+      <div class="form-title">Request Full Catalogue</div>
+      <p class="form-sub">Complete the form and we'll be in touch.</p>
+
+      <div class="f-row">
+        <div class="fg">
+          <label>First Name *</label>
+          <input type="text" name="firstName" placeholder="Your name" required>
+        </div>
+        <div class="fg">
+          <label>Company *</label>
+          <input type="text" name="company" placeholder="Your company" required>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label>Business Email *</label>
+        <input type="email" name="email" placeholder="you@company.com" required>
+      </div>
+
+      <div class="fg">
+        <label>Licence Type</label>
+        <select name="licenceType">
+          <option value="">Select…</option>
+          <option>ODC Licence Holder / TGA Sponsor</option>
+          <option>Wholesale Distributor</option>
+          <option>Pharmacy Network</option>
+          <option>Telehealth / Clinic Platform</option>
+          <option>Exploring / Not yet licensed</option>
+        </select>
+      </div>
+
+            <div class="fg">
+        <label>Strain of Interest</label>
+        <input type="text" name="strainOfInterest" id="strainOfInterest" placeholder="Which cultivars interest you? (optional)">
+      </div>
+
+<div class="fg">
+        <label>Message (optional)</label>
+        <input type="text" name="message" placeholder="Tell us what you're looking for">
+      </div>
+
+      <button type="submit" id="gate-btn" class="btn-submit">Send Catalogue Request →</button>
+      <p class="form-privacy">Your enquiry is sent directly to info@gcsystems.ca.</p>
+    </form>
+  </div>
+</div>
+
 <div class="custom-strip">
   <div class="custom-content">
-    <p class="custom-eyebrow">Beyond the Catalogue</p>
-    <p class="custom-text"><strong>Custom cultivation available for long-term partners.</strong> If your portfolio requires a cultivar or cannabinoid profile not listed, we welcome a conversation about custom cultivation arrangements.</p>
+    <p class="custom-eyebrow">Availability &amp; Custom Cultivation</p>
+    <p class="custom-text"><strong>Availability varies by cultivar and season</strong> — contact us to confirm what's currently in rotation and ready for near-term supply. For cultivars or cannabinoid profiles beyond the published catalogue, <strong>custom cultivation is available for long-term partners.</strong></p>
   </div>
   <a href="contact.html" class="custom-link">Discuss Custom Cultivation →</a>
 </div>
@@ -363,7 +434,22 @@ document.querySelectorAll('.f-btn').forEach(btn=>{
   });
 });
 document.querySelectorAll('a[href="#get-catalogue"]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();document.getElementById('get-catalogue').scrollIntoView({behavior:'smooth'});});
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    var strain = a.getAttribute('data-strain');
+    if (strain) {
+      var field = document.getElementById('strainOfInterest');
+      if (field) {
+        var current = field.value.trim();
+        if (!current) {
+          field.value = strain;
+        } else if (current.indexOf(strain) === -1) {
+          field.value = current + ', ' + strain;
+        }
+      }
+    }
+    document.getElementById('get-catalogue').scrollIntoView({behavior:'smooth'});
+  });
 });
 </script>
 
