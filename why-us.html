@@ -115,8 +115,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--forest);
 /* Per-batch terpene highlight — only this one */
 .test-item.hl{background:rgba(200,146,42,.09);
   margin:0 -22px;padding:11px 22px;
-  border-top:1px solid rgba(200,146,42,.22);
-  border-bottom:1px solid rgba(200,146,42,.22)}
+  border-bottom:1px solid rgba(200,146,42,.18)}
+.test-item.hl + .test-item.hl{border-top:none}
+.test-item.hl:first-of-type{border-top:1px solid rgba(200,146,42,.22)}
+.test-item.hl:last-of-type{border-bottom:1px solid rgba(200,146,42,.22)}
 .test-item.hl .test-name{color:var(--gold-lt)}
 .test-item.hl .test-note{color:rgba(255,255,255,.80)}
 
@@ -321,7 +323,7 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.08);
       <div class="testing-box">
         <div class="testing-box-title">Batch Documentation</div>
 
-        <div class="test-item">
+        <div class="test-item hl">
           <span class="test-tick">✓</span>
           <div>
             <div class="test-name">Batch-specific COA</div>
@@ -329,7 +331,6 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.08);
           </div>
         </div>
 
-        <!-- Only this one highlighted — the true differentiator -->
         <div class="test-item hl">
           <span class="test-tick">✓</span>
           <div>
@@ -338,7 +339,7 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.08);
           </div>
         </div>
 
-        <div class="test-item">
+        <div class="test-item hl">
           <span class="test-tick">✓</span>
           <div>
             <div class="test-name">Confirmed PGR-free</div>
@@ -346,13 +347,6 @@ footer{background:var(--forest);border-top:1px solid rgba(255,255,255,.08);
           </div>
         </div>
 
-        <div class="test-item">
-          <span class="test-tick">✓</span>
-          <div>
-            <div class="test-name">Irradiation Certificate</div>
-            <div class="test-note">Every batch is irradiation-treated by an accredited facility prior to Australian export — certificate included with every shipment.</div>
-          </div>
-        </div>
 
       </div>
       <div class="badge-row">
